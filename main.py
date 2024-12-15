@@ -116,6 +116,7 @@ while True:
             cv2.putText(frame, "RIGHT", (50,100), font, 2, (0,255, 255), 3)
             new_frame[:] = (0, 255, 255)
 
+
         
         
         cv2.putText(frame, str(gaze_ratio), (50,100), font, 2, (0,255, 255), 3)
