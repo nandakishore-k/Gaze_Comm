@@ -69,7 +69,9 @@ def get_gaze_ratio(eye_points, facial_landmarks):
 
 
 detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
+predictor = dlib.shape_predictor("c:/Users/nsys/Desktop/main project/Gaze_Comm/shape_predictor_68_face_landmarks.dat")
+
+#predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
 cap = cv2.VideoCapture(0)
 
 font =  cv2.FONT_HERSHEY_COMPLEX
