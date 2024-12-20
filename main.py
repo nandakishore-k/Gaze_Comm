@@ -2,6 +2,12 @@ import cv2
 import numpy as np
 import dlib
 from math import hypot
+import pyglet
+import time
+
+sound=pyglet.media.load("sound.wav",streaming=False)
+left_sound=pyglet.media.load("left.wav",streaming=False)
+right_sound=pyglet.media.load("right.wav",streaming=False)
 
 def midpoint(p1,p2):
     return int((p1.x + p2.x)/2), int((p1.y + p2.y)/2)
@@ -68,20 +74,98 @@ def get_gaze_ratio(eye_points, facial_landmarks):
     
 
 
+board=np.zeros((500,500),np.uint8)
+board[:]=255
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor("c:/Users/nsys/Desktop/main project/Gaze_Comm/shape_predictor_68_face_landmarks.dat")
+keyboard=np.zeros((600,1000,3),np.uint8)
+keys_set_1={0:"Q",1:"W",2:"E",3:"R",4:"T",5:"A",6:"S",7:"D",8:"F",9:"G"
+,10:"Z",11:"X",12:"C",13:"V",14:"B"}
+def letter(letter_index,text,letter_light):
+    #keys
+    if letter_index==0:
+        x=0
+        y=0
+    elif letter_index==1:
+        x=200
+        y=0
+    elif letter_index==2:
+        x=400
+        y=0
+    elif letter_index==3:
+        x=600
+        y=0
+    elif letter_index==4:
+        x=800
+        y=0
+    elif letter_index==5:
+        x=0
+        y=200
+    elif letter_index==6:
+        x=200
+        y=200
+    elif letter_index==7:
+        x=400
+        y=200
+    elif letter_index==8:
+        x=600
+        y=200
+    elif letter_index==9:
+        x=800
+        y=200
+    elif letter_index==10:
+        x=0
+        y=400
+    elif letter_index==11:
+        x=200
+        y=400
+    elif letter_index==12:
+        x=400
+        y=400
+    elif letter_index==13:
+        x=600
+        y=400
+    elif letter_index==14:
+        x=800
+        y=400
+    
+    width=200
+    height=200
+    th=3
+    if letter_light is True:
+        cv2.rectangle(keyboard,(x+th,y+th),(x+width-th,y+height-th),(255,255,255),-1)
+    else:
+        cv2.rectangle(keyboard,(x+th,y+th),(x+width-th,y+height-th),(255,0,0),th)
+    font_letter=cv2.FONT_HERSHEY_PLAIN
+    font_scale=10
+    font_th=4
+    text_size=cv2.getTextSize(text,font_letter,font_scale,font_th)
+    width_text,height_text=text_size[0]
+    text_x=int((width-width_text)/2)+x
+    text_y=int((height+height_text)/2)+y
+    cv2.putText(keyboard,text,(text_x,text_y),font_letter,font_scale,(255,0,0),font_th)
 
 #predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
 cap = cv2.VideoCapture(0)
 
 font =  cv2.FONT_HERSHEY_COMPLEX
 
-
+frames=0
+letter_index=0
+blinking_frames=0
+frames_to_blink=6
+frames_active_letter=9
+text=""
+keyboard_selected="left"
+last_keyboard_selected="left"
 while True:
     _, frame = cap.read()
+    frame=cv2.resize(frame,None,fx=0.5,fy=0.5)
+    keyboard[:]=(0,0,0)
+    frames+=1
     new_frame = np.zeros((500, 500, 3), np.uint8)
     gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
-
+    active_letter=keys_set_1[letter_index]
     faces = detector(gray)
     for face in faces:
         #x, y = face.left() , face.top()
@@ -97,8 +181,17 @@ while True:
         blinking_ratio = (left_eye_ratio + right_eye_ratio)/2
 
         if blinking_ratio > 5.7:
-            cv2.putText(frame, "BLINKING", (50, 150), font, 3, (255,255,0))
+            cv2.putText(frame, "BLINKING", (50, 150), font, 3, (255,255,0),thickness=3)
+            blinking_frames+=1
+            frames-=1
+            if blinking_frames==5:
+                text+=active_letter
+                sound.play()
+                time.sleep(1)
 
+        else:
+            blinking_frames=0
+          
         #gaze detection-----------------------------------------------------------------------------------
         
         gaze_ratio_left_eye = get_gaze_ratio([36,37,38,39,40,41], landmarks)
@@ -109,15 +202,22 @@ while True:
         
 
         if(gaze_ratio < 1):
-            cv2.putText(frame, "LEFT", (50,100), font, 2, (0,0, 255), 3)
-            new_frame[:] = (0, 0, 255)
-        elif 1 < gaze_ratio < 3:
-            cv2.putText(frame, "CENTER", (50,100), font, 2, (255,0, 255), 3)
-            new_frame[:] = (255, 0, 255)
+            #cv2.putText(frame, "LEFT", (50,100), font, 2, (0,0, 255), 3)
+            #new_frame[:] = (0, 0, 255)
+            keyboard_selected="right"
+            if keyboard_selected!=last_keyboard_selected:
+                right_sound.play()
+                time.sleep(1)
+                last_keyboard_selected=keyboard_selected
         else:
-            cv2.putText(frame, "RIGHT", (50,100), font, 2, (0,255, 255), 3)
-            new_frame[:] = (0, 255, 255)
-
+            #cv2.putText(frame, "RIGHT", (50,100), font, 2, (0,255, 255), 3)
+            #new_frame[:] = (0, 255, 255)
+            keyboard_selected="left"
+            if keyboard_selected!=last_keyboard_selected:
+                left_sound.play()
+                time.sleep(1)
+                last_keyboard_selected=keyboard_selected
+        
 
         
         
@@ -135,9 +235,23 @@ while True:
 
         #show direction---------------------------------------------------------------------------------------
         
-    cv2.imshow("newFr", new_frame)
-    cv2.imshow("Frame",frame)
+    if frames==15:
+        letter_index+=1
+        frames=0
+    if letter_index==15:
+        letter_index=0
+    for i in range(15):
+        if i==letter_index:
+            light=True
+        else:
+            light=False
+        letter(i,keys_set_1[i],light)
 
+    cv2.putText(board,text,(10,100),font,4,0,3)
+    #cv2.imshow("newFr", new_frame)
+    cv2.imshow("Frame",frame)
+    cv2.imshow("Virtual keyboard",keyboard)
+    cv2.imshow("Board",board)
     key = cv2.waitKey(1)
     if key==27:
         break
