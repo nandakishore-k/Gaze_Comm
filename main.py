@@ -8,6 +8,40 @@ import time
 sound=pyglet.media.load("sound.wav",streaming=False)
 left_sound=pyglet.media.load("left.wav",streaming=False)
 right_sound=pyglet.media.load("right.wav",streaming=False)
+def draw_menu():
+    rows, cols, _ = frame.shape
+    # Draw the selection rectangle for the menu
+    cv2.rectangle(frame, (0, 0), (cols // 2, rows), (255, 255, 255), -1)
+    cv2.rectangle(frame, (cols // 2, 0), (cols, rows), (200, 200, 200), -1)
+
+    # Add text for "Left" option
+    cv2.putText(frame, "LEFT", (int(cols * 0.1), int(rows * 0.5)),
+                cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 0), 3)
+
+    # Add text for "Right" option
+    cv2.putText(frame, "RIGHT", (int(cols * 0.6), int(rows * 0.5)),
+                cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 0), 3)
+def eyes_contour_points(landmarks):
+    # Extract points for left and right eyes based on dlib's 68-point model
+    left_eye = np.array([
+        (landmarks.part(36).x, landmarks.part(36).y),
+        (landmarks.part(37).x, landmarks.part(37).y),
+        (landmarks.part(38).x, landmarks.part(38).y),
+        (landmarks.part(39).x, landmarks.part(39).y),
+        (landmarks.part(40).x, landmarks.part(40).y),
+        (landmarks.part(41).x, landmarks.part(41).y)
+    ], np.int32)
+
+    right_eye = np.array([
+        (landmarks.part(42).x, landmarks.part(42).y),
+        (landmarks.part(43).x, landmarks.part(43).y),
+        (landmarks.part(44).x, landmarks.part(44).y),
+        (landmarks.part(45).x, landmarks.part(45).y),
+        (landmarks.part(46).x, landmarks.part(46).y),
+        (landmarks.part(47).x, landmarks.part(47).y)
+    ], np.int32)
+
+    return left_eye, right_eye
 
 def midpoint(p1,p2):
     return int((p1.x + p2.x)/2), int((p1.y + p2.y)/2)
@@ -79,10 +113,17 @@ board[:]=255
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor("c:/Users/nsys/Desktop/main project/Gaze_Comm/shape_predictor_68_face_landmarks.dat")
 keyboard=np.zeros((600,1000,3),np.uint8)
+#keyboard = np.zeros((300, 500, 3), np.uint8)
 keys_set_1={0:"Q",1:"W",2:"E",3:"R",4:"T",5:"A",6:"S",7:"D",8:"F",9:"G"
-,10:"Z",11:"X",12:"C",13:"V",14:"B"}
+,10:"Z",11:"X",12:"C",13:"V",14:"<"}
+keys_set_2={0:"Y",1:"U",2:"I",3:"O",4:"P",5:"H",6:"J",7:"K",8:"L",9:"_"
+,10:"V",11:"B",12:"N",13:"M",14:"<"}
 def letter(letter_index,text,letter_light):
     #keys
+    rows = letter_index // 5  # To decide row based on index
+    cols = letter_index % 5   # To decide column based on index
+    x = cols * 200  # Cell width is 200
+    y = rows * 200  # Cell height is 200
     if letter_index==0:
         x=0
         y=0
@@ -158,14 +199,24 @@ frames_active_letter=9
 text=""
 keyboard_selected="left"
 last_keyboard_selected="left"
+select_keyboard_menu=True
+keyboard_selection_frames=0
 while True:
     _, frame = cap.read()
-    frame=cv2.resize(frame,None,fx=0.5,fy=0.5)
-    keyboard[:]=(0,0,0)
+    #frame=cv2.resize(frame,None,fx=0.5,fy=0.5)
+    rows,cols,_=frame.shape
+    keyboard[:]=(26,26,26)
     frames+=1
     new_frame = np.zeros((500, 500, 3), np.uint8)
     gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
-    active_letter=keys_set_1[letter_index]
+    frame[rows-50:rows,0:cols]=(255,255,255)
+    if select_keyboard_menu is True:
+        draw_menu()
+    if keyboard_selected=="left":
+        keys_set=keys_set_1
+    else:
+        keys_set=keys_set_2
+    active_letter=keys_set[letter_index]
     faces = detector(gray)
     for face in faces:
         #x, y = face.left() , face.top()
@@ -173,14 +224,16 @@ while True:
         #cv2.rectangle(frame,(x, y),(x1, y1), (0 , 255, 0), 2)
 
         landmarks = predictor(gray, face)
-        
+        left_eye,right_eye=eyes_contour_points(landmarks)
         #blinking detection ------------------------------------------------------------------------------
         left_eye_ratio = get_blinking_ratio([36,37,38,39,40,41], landmarks)
         right_eye_ratio = get_blinking_ratio([42,43,44,45,46,47], landmarks)
 
         blinking_ratio = (left_eye_ratio + right_eye_ratio)/2
+        cv2.polylines(frame,[left_eye],True,(0,0,255),2)
+        cv2.polylines(frame,[right_eye],True,(0,0,255),2)
 
-        if blinking_ratio > 5.7:
+        """if blinking_ratio > 5.7:
             cv2.putText(frame, "BLINKING", (50, 150), font, 3, (255,255,0),thickness=3)
             blinking_frames+=1
             frames-=1
@@ -190,36 +243,77 @@ while True:
                 time.sleep(1)
 
         else:
-            blinking_frames=0
+            blinking_frames=0"""
           
         #gaze detection-----------------------------------------------------------------------------------
+        if select_keyboard_menu is True:
+            gaze_ratio_left_eye = get_gaze_ratio([36,37,38,39,40,41], landmarks)
+            gaze_ratio_right_eye = get_gaze_ratio([42,43,44,45,46,47], landmarks)
+
+            gaze_ratio = (gaze_ratio_left_eye + gaze_ratio_right_eye) / 2
+
         
-        gaze_ratio_left_eye = get_gaze_ratio([36,37,38,39,40,41], landmarks)
-        gaze_ratio_right_eye = get_gaze_ratio([42,43,44,45,46,47], landmarks)
 
-        gaze_ratio = (gaze_ratio_left_eye + gaze_ratio_right_eye) / 2
-
-        
-
-        if(gaze_ratio < 1):
+            if(gaze_ratio < 1):
             #cv2.putText(frame, "LEFT", (50,100), font, 2, (0,0, 255), 3)
             #new_frame[:] = (0, 0, 255)
-            keyboard_selected="right"
-            if keyboard_selected!=last_keyboard_selected:
-                right_sound.play()
-                time.sleep(1)
-                last_keyboard_selected=keyboard_selected
+                keyboard_selected="right"
+                keyboard_selection_frames+=1
+                if keyboard_selection_frames==15:
+                    select_keyboard_menu=False
+                    right_sound.play()
+                    frames=0
+                    #keyboard_selection_frames=0
+                if keyboard_selected!=last_keyboard_selected:
+                    #right_sound.play()
+                    #time.sleep(1)
+                    last_keyboard_selected=keyboard_selected
+                    keyboard_selection_frames=0
+            else:
+                #cv2.putText(frame, "RIGHT", (50,100), font, 2, (0,255, 255), 3)
+                #new_frame[:] = (0, 255, 255)
+                keyboard_selected="left"
+                keyboard_selection_frames+=1
+                if keyboard_selection_frames==15:
+                    select_keyboard_menu=False
+                    left_sound.play()
+                    frames=0
+                if keyboard_selected!=last_keyboard_selected:
+                    #left_sound.play()
+                    #time.sleep(1)
+                    last_keyboard_selected=keyboard_selected
+                    keyboard_selection_frames=0
         else:
-            #cv2.putText(frame, "RIGHT", (50,100), font, 2, (0,255, 255), 3)
-            #new_frame[:] = (0, 255, 255)
-            keyboard_selected="left"
-            if keyboard_selected!=last_keyboard_selected:
-                left_sound.play()
-                time.sleep(1)
-                last_keyboard_selected=keyboard_selected
-        
-
-        
+            print(f"Blinking Ratio: {blinking_ratio}")
+            if blinking_ratio>5.7:
+                cv2.putText(frame, "BLINKING", (50, 150), font, 3, (255,255,0),thickness=3)
+                print(active_letter)
+                blinking_frames+=1
+                frames-=1
+                cv2.polylines(frame,[left_eye],True,(0,0,255),2)
+                cv2.polylines(frame,[right_eye],True,(0,0,255),2)
+                if blinking_frames==frames_to_blink:
+                    if active_letter!="<" and active_letter!="_":
+                        text+=active_letter
+                        
+                    if active_letter=="_":
+                        text+=" "
+                    sound.play()
+                    select_keyboard_menu=True
+            else:
+                blinking_frames=0
+        if select_keyboard_menu is False:
+            if frames==frames_active_letter:
+                letter_index+=1
+                frames=0
+            if letter_index==15:
+                letter_index=0
+            for i in range(15):
+                if i==letter_index:
+                    light=True
+                else:
+                    light=False
+                letter(i,keys_set[i],light)
         
         cv2.putText(frame, str(gaze_ratio), (50,100), font, 2, (0,255, 255), 3)
 
@@ -245,9 +339,12 @@ while True:
             light=True
         else:
             light=False
-        letter(i,keys_set_1[i],light)
-
+        letter(i,keys_set[i],light)
     cv2.putText(board,text,(10,100),font,4,0,3)
+    percentage_blinking=blinking_frames/frames_to_blink
+    loading_x=int(cols*percentage_blinking)
+    cv2.rectangle(frames,(0,rows-50),(loading_x,rows),(51,51,51),-1)
+
     #cv2.imshow("newFr", new_frame)
     cv2.imshow("Frame",frame)
     cv2.imshow("Virtual keyboard",keyboard)
