@@ -110,6 +110,8 @@ class Ui_MainWindow(object):
         MainWindow.resize(1264, 759)
         MainWindow.setStyleSheet("\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0.329545, x2:1, y2:0, stop:0.0894737 rgba(0, 117, 184, 255), stop:0.884211 rgba(255, 255, 255, 255));")
+        
+        self.eye_detector = EyeDetection("C:/Users/nsys/Desktop/main project/Gaze_Comm/shape_predictor_68_face_landmarks.dat")  
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.keyboard = QtWidgets.QFrame(self.centralwidget)
@@ -455,7 +457,7 @@ class Ui_MainWindow(object):
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             h, w, ch = frame.shape
             qimg = QImage(frame.data, w, h, ch * w, QImage.Format_RGB888)
-            self.video_label.setPixmap(QPixmap.fromImage(qimg))
+            self.label.setPixmap(QPixmap.fromImage(qimg))
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
