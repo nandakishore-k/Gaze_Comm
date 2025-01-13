@@ -105,18 +105,13 @@ class EyeDetection:
 
 
 class Ui_MainWindow(object):
-#------------i did put a constructor here-----------------------
-    def __init__(self, eye_detector):
-        super().__init__()
-        self.eye_detector = eye_detector
-        #self.setupUi(QtWidgets.QMainWindow())
-
-
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1264, 759)
         MainWindow.setStyleSheet("\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0.329545, x2:1, y2:0, stop:0.0894737 rgba(0, 117, 184, 255), stop:0.884211 rgba(255, 255, 255, 255));")
+        
+        self.eye_detector = EyeDetection("shape_predictor_68_face_landmarks.dat")  
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.keyboard = QtWidgets.QFrame(self.centralwidget)
@@ -461,16 +456,14 @@ class Ui_MainWindow(object):
             frame = self.eye_detector.process_frame(frame)
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-        
-        # Resize the frame to match the QLabel size
-            label_width = self.video_label.width()
-            label_height = self.video_label.height()
+         # Resize the frame to match the QLabel size
+            label_width = self.label.width()
+            label_height = self.label.height()
             frame = cv2.resize(frame, (label_width, label_height), interpolation=cv2.INTER_AREA)
-
 
             h, w, ch = frame.shape
             qimg = QImage(frame.data, w, h, ch * w, QImage.Format_RGB888)
-            self.video_view.setPixmap(QPixmap.fromImage(qimg))
+            self.label.setPixmap(QPixmap.fromImage(qimg))
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -496,16 +489,9 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
-
-    shape_predictor_path = "shape_predictor_68_face_landmarks.dat"
-    
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-
-    #----- below two lines are experimental--------------------
-    eye_detector = EyeDetection(shape_predictor_path)
-    ui = Ui_MainWindow(eye_detector)
-
+    ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
