@@ -354,7 +354,7 @@ class Ui_MainWindow(object):
          # Timer to track frame count
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.update_frame_count)
-        self.timer.start(16)  # Start a timer with approximately 60 FPS (1000ms/60 = 16ms)
+        self.timer.start(2)  # Start a timer with approximately 60 FPS (1000ms/60 = 16ms)
 
         # Frame counter variable
         self.frame_count = 0
@@ -365,6 +365,19 @@ class Ui_MainWindow(object):
         #self.word4.setText(f" {self.frame_count}")
         if(self.frame_count == 20):
             self.a_button.setStyleSheet("background-color: rgb(255, 255, 255 );")
+    def update_frame(self):
+        ret, frame = self.cap.read()
+        if ret:
+            # Convert OpenCV BGR frame to RGB
+            rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            h, w, ch = rgb_frame.shape
+            bytes_per_line = ch * w
+
+            # Create QImage
+            qt_image = QImage(rgb_frame.data, w, h, bytes_per_line, QImage.Format_RGB888)
+
+            # Convert QImage to QPixmap and display in QLabel
+            self.video_label.setPixmap(QPixmap.fromImage(qt_image))
 
 
     def keyPressEvent(self, event):
