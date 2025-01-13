@@ -19,7 +19,6 @@ import numpy as np
 import dlib
 from math import hypot
 
-
 #------------Eye Detection------------------------------
 class EyeDetection:
     def __init__(self, shape_predictor_path):
