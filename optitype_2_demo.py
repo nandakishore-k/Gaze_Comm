@@ -363,7 +363,7 @@ class Ui_MainWindow(object):
         self.timer.timeout.connect(self.update_frame)
         self.cap = cv2.VideoCapture(0)
         self.timer.start(30)
-#-------------------frame update function------------------------
+#---------------------frame update function------------------------
     def update_frame(self):
         ret, frame = self.cap.read()
         if ret:
