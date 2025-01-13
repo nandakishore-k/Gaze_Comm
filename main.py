@@ -111,7 +111,7 @@ def get_gaze_ratio(eye_points, facial_landmarks):
 board=np.zeros((500,500),np.uint8)
 board[:]=255
 detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor("c:/Users/nsys/Desktop/main project/Gaze_Comm/shape_predictor_68_face_landmarks.dat")
+predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
 keyboard=np.zeros((600,1000,3),np.uint8)
 #keyboard = np.zeros((300, 500, 3), np.uint8)
 keys_set_1={0:"Q",1:"W",2:"E",3:"R",4:"T",5:"A",6:"S",7:"D",8:"F",9:"G"
