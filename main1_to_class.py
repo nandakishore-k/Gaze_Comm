@@ -1,12 +1,7 @@
-import sys
 import cv2
 import numpy as np
 import dlib
 from math import hypot
-from PyQt5.QtCore import QTimer
-from PyQt5.QtGui import QImage, QPixmap
-from PyQt5.QtWidgets import QApplication, QLabel, QVBoxLayout, QWidget
-
 
 class EyeDetection:
     def __init__(self, shape_predictor_path):
@@ -90,44 +85,21 @@ class EyeDetection:
 
         return frame
 
-
-class VideoApp(QWidget):
-    def __init__(self, eye_detector):
-        super().__init__()
-        self.eye_detector = eye_detector
-        self.init_ui()
-
-    def init_ui(self):
-        self.video_label = QLabel(self)
-        self.layout = QVBoxLayout()
-        self.layout.addWidget(self.video_label)
-        self.setLayout(self.layout)
-
-        self.timer = QTimer(self)
-        self.timer.timeout.connect(self.update_frame)
-        self.cap = cv2.VideoCapture(0)
-        self.timer.start(30)
-
-    def update_frame(self):
-        ret, frame = self.cap.read()
-        if ret:
-            frame = self.eye_detector.process_frame(frame)
-            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            h, w, ch = frame.shape
-            qimg = QImage(frame.data, w, h, ch * w, QImage.Format_RGB888)
-            self.video_label.setPixmap(QPixmap.fromImage(qimg))
-
-    def closeEvent(self, event):
-        self.cap.release()
-        cv2.destroyAllWindows()
-        event.accept()
-
-
 if __name__ == "__main__":
     shape_predictor_path = "shape_predictor_68_face_landmarks.dat"
-    app = QApplication(sys.argv)
     eye_detector = EyeDetection(shape_predictor_path)
-    window = VideoApp(eye_detector)
-    window.setWindowTitle("Eye Detection")
-    window.show()
-    sys.exit(app.exec_())
+    cap = cv2.VideoCapture(0)
+
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        frame = eye_detector.process_frame(frame)
+        cv2.imshow("Frame", frame)
+
+        if cv2.waitKey(1) == 27:
+            break
+
+    cap.release()
+    cv2.destroyAllWindows()
