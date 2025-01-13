@@ -545,7 +545,7 @@ border-radius: 0px;
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../downloads/up-removebg-preview.png</pixmap>
+      <pixmap>../images/up.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -592,7 +592,7 @@ border-radius: 0px;
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../downloads/left-removebg-preview.png</pixmap>
+      <pixmap>../images/left.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -689,7 +689,7 @@ border-radius: 0px;
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../downloads/right-removebg-preview.png</pixmap>
+      <pixmap>../images/right.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -736,7 +736,7 @@ border-radius: 0px;
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../downloads/down-removebg-preview.png</pixmap>
+      <pixmap>../images/down.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -783,7 +783,7 @@ border-radius: 0px;
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../downloads/images-removebg-preview.png</pixmap>
+      <pixmap>../images/voice_icon.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -806,7 +806,7 @@ border-radius: 0px;
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../../downloads/LOGO-removebg-preview.png</pixmap>
+     <pixmap>../images/logo.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
