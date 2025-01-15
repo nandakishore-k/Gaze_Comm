@@ -96,6 +96,8 @@ class EyeDetection:
 
             if gaze_ratio < 1:
                 cv2.putText(frame, "LEFT", (50, 100), self.font, 2, (0, 0, 255), 3)
+                #when left we need to do left transition over the buttons
+
             elif 1 < gaze_ratio < 3:
                 cv2.putText(frame, "CENTER", (50, 100), self.font, 2, (255, 0, 255), 3)
             else:
@@ -112,6 +114,7 @@ class Ui_MainWindow(object):
 "background-color: qlineargradient(spread:pad, x1:0, y1:0.329545, x2:1, y2:0, stop:0.0894737 rgba(0, 117, 184, 255), stop:0.884211 rgba(255, 255, 255, 255));")
         
         self.eye_detector = EyeDetection("shape_predictor_68_face_landmarks.dat")  
+
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.keyboard = QtWidgets.QFrame(self.centralwidget)
@@ -464,6 +467,10 @@ class Ui_MainWindow(object):
             h, w, ch = frame.shape
             qimg = QImage(frame.data, w, h, ch * w, QImage.Format_RGB888)
             self.label.setPixmap(QPixmap.fromImage(qimg))
+#---------------button navigation function--------------------------------
+    def navigate():
+        i=0
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate

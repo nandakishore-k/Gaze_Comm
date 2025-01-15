@@ -29,7 +29,7 @@ def get_blinking_ratio(eye_points, facial_landmarks):
 
 
 detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor("H:\Main Project\shape_predictor_68_face_facial_landmarks.dat")
+predictor = dlib.shape_predictor("shape_predictor_68_face_facial_landmarks.dat")
 cap = cv2.VideoCapture(0)
 
 font =  cv2.FONT_HERSHEY_COMPLEX
