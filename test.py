@@ -1,66 +1,47 @@
-import dlib
-print(dlib.__version__)
-
-
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
 import cv2
-import numpy as np
-import dlib
-from math import hypot
+import sys
 
-def midpoint(p1,p2):
-    return int((p1.x + p2.x)/2), int((p1.y + p2.y)/2)
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setWindowTitle("Eye Detection")
+        MainWindow.setGeometry(100, 100, 800, 600)
 
-def get_blinking_ratio(eye_points, facial_landmarks):
-    right_point = (facial_landmarks.part(eye_points[0]).x, facial_landmarks.part(eye_points[0]).y)
-    left_point = (facial_landmarks.part(eye_points[3]).x, facial_landmarks.part(eye_points[3]).y)
-    center_top = midpoint(facial_landmarks.part(eye_points[1]), facial_landmarks.part(eye_points[2]))
-    bottom_top = midpoint(facial_landmarks.part(eye_points[5]), facial_landmarks.part(eye_points[4]))
+        # Example widget: a QLabel to display status
+        self.status_label = QLabel(MainWindow)
+        self.status_label.setGeometry(50, 50, 300, 50)
+        self.status_label.setText("No detection yet")
+        self.status_label.setStyleSheet("background-color: lightgray; font-size: 16px; padding: 5px;")
 
-    hor_line = cv2.line(frame, left_point, right_point, (255, 255 , 0), 2)
-    ver_line = cv2.line(frame, center_top, bottom_top, (255, 255 , 0), 2)
+class EyeDetection(Ui_MainWindow):
+    def __init__(self):
+        self.font = cv2.FONT_HERSHEY_SIMPLEX  # Set font for OpenCV text
 
-    hor_line_length = hypot((left_point[0] - right_point[0]), (left_point[1]-right_point[1]))
-    ver_line_length = hypot((center_top[0] - bottom_top[0]), (center_top[1] - bottom_top[1]))
+    def process_frame(self, frame):
+        # Example logic for gaze detection
+        gaze_ratio = 0.5  # Replace this with actual gaze detection logic
 
-    ratio = (hor_line_length/ver_line_length)
+        if gaze_ratio < 1:
+            cv2.putText(frame, "LEFT", (50, 100), self.font, 2, (0, 0, 255), 3)
+            self.update_widget_property()
 
-    return ratio
-    
+    def update_widget_property(self):
+        """Update widget property when gaze is detected."""
+        self.status_label.setText("Gaze detected: LEFT")
+        self.status_label.setStyleSheet("background-color: lightblue; font-size: 16px; padding: 5px;")
 
+def main():
+    app = QApplication(sys.argv)
+    MainWindow = QMainWindow()
+    ui = EyeDetection()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
 
-detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor("shape_predictor_68_face_facial_landmarks.dat")
-cap = cv2.VideoCapture(0)
+    # Simulate video frame processing
+    frame = None  # Replace with an actual frame from a video feed
+    ui.process_frame(frame)
 
-font =  cv2.FONT_HERSHEY_COMPLEX
+    sys.exit(app.exec_())
 
-
-while True:
-    _, frame = cap.read()
-    gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
-
-    faces = detector(gray)
-    for face in faces:
-        #x, y = face.left() , face.top()
-        #x1, y1 = face.right() , face.bottom()
-        #cv2.rectangle(frame,(x, y),(x1, y1), (0 , 255, 0), 2)
-
-        landmarks = predictor(gray, face)
-        
-        left_eye_ratio = get_blinking_ratio([36,37,38,39,40,41], landmarks)
-        right_eye_ratio = get_blinking_ratio([42,43,44,45,46,47], landmarks)
-
-        if left_eye_ratio > 6:
-            cv2.putText(frame, "BLINKING", (50, 150), font, 3, (255,255,0))
-
-        #y = facial_landmarks.part(36).y
-        #cv2.circle(frame, (x, y), 3, (255, 255 , 0), 2)
-
-    cv2.imshow("Frame",frame)
-
-    key = cv2.waitKey(1)
-    if key==27:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
+if __name__ == "__main__":
+    main()
