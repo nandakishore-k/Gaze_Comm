@@ -32,6 +32,9 @@ class Ui_MainWindow(object):
 
         self.setupUi()
         self.MainWindow = MainWindow
+
+        #time counter variable
+        self.time_count = 0
         
 
     def setupUi(self):
@@ -44,8 +47,9 @@ class Ui_MainWindow(object):
 
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
         self.keyboard = QtWidgets.QFrame(self.centralwidget)
-        self.keyboard.setGeometry(QtCore.QRect(110, 470, 821, 211))
+        self.keyboard.setGeometry(QtCore.QRect(110, 470, 821, 220))
         self.keyboard.setStyleSheet("\n"
 "background-color: qlineargradient(spread:pad, x1:0.568, y1:0.636727, x2:1, y2:1, stop:0 rgba(201, 229, 255, 255), stop:1 rgba(255, 255, 255, 255));\n"
 "\n"
@@ -53,6 +57,48 @@ class Ui_MainWindow(object):
         self.keyboard.setFrameShape(QtWidgets.QFrame.WinPanel)
         self.keyboard.setFrameShadow(QtWidgets.QFrame.Raised)
         self.keyboard.setObjectName("keyboard")
+
+        #------------------experimental section----------------------------------------
+
+        # OptiType keyboard layout
+        self.keyboard_layout = [
+            ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],  # Row 0
+            ['J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R'],  # Row 1
+            ['S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ' ']   # Row 2
+        ]
+        
+        # Keyboard Buttons
+        self.keyboard_buttons = []
+        for i, row in enumerate(self.keyboard_layout):
+            self.button_row = []
+            for j, letter in enumerate(row):
+                self.a_button = QtWidgets.QFrame(self.keyboard)
+                self.a_button.setGeometry(QtCore.QRect(10 + j * 90, 10 + i * 70, 61, 61))
+                self.a_button.setStyleSheet("background-color: rgb(255, 255, 255);")
+                self.a_button.setFrameShape(QtWidgets.QFrame.WinPanel)
+                self.a_button.setFrameShadow(QtWidgets.QFrame.Raised)
+                self.a_button.setLineWidth(7)
+                self.a_button.setObjectName("a_button")
+
+                #alphabet adding
+                self.letter_a = QtWidgets.QLabel(self.a_button)
+                self.letter_a.setGeometry(QtCore.QRect(10, 10, 31, 31))
+                font = QtGui.QFont()
+                font.setPointSize(24)
+                font.setBold(True)
+                font.setWeight(75)
+                self.letter_a.setFont(font)
+                self.letter_a.setStyleSheet("color: rgb(85, 85, 255);")
+                self.letter_a.setFrameShadow(QtWidgets.QFrame.Plain)
+                self.letter_a.setObjectName("letter_a")
+                self.letter_a.setText( letter)
+
+            self.keyboard_buttons.append(self.button_row)
+
+
+        #------------------^^^ experimental section ends ^^^----------------------------------------
+
+        """
         self.a_button = QtWidgets.QFrame(self.keyboard)
         self.a_button.setGeometry(QtCore.QRect(20, 10, 61, 60))
         self.a_button.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -70,6 +116,7 @@ class Ui_MainWindow(object):
         self.letter_a.setStyleSheet("color: rgb(85, 85, 255);")
         self.letter_a.setFrameShadow(QtWidgets.QFrame.Plain)
         self.letter_a.setObjectName("letter_a")
+        
         self.s_button = QtWidgets.QFrame(self.keyboard)
         self.s_button.setGeometry(QtCore.QRect(90, 10, 61, 60))
         self.s_button.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -87,6 +134,7 @@ class Ui_MainWindow(object):
         self.letter_s.setStyleSheet("color: rgb(85, 85, 255);")
         self.letter_s.setFrameShadow(QtWidgets.QFrame.Plain)
         self.letter_s.setObjectName("letter_s")
+        
         self.d_button = QtWidgets.QFrame(self.keyboard)
         self.d_button.setGeometry(QtCore.QRect(160, 10, 61, 60))
         self.d_button.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -104,6 +152,7 @@ class Ui_MainWindow(object):
         self.letter_d.setStyleSheet("color: rgb(85, 85, 255);")
         self.letter_d.setFrameShadow(QtWidgets.QFrame.Plain)
         self.letter_d.setObjectName("letter_d")
+
         self.f_button = QtWidgets.QFrame(self.keyboard)
         self.f_button.setGeometry(QtCore.QRect(230, 10, 61, 60))
         self.f_button.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -121,6 +170,7 @@ class Ui_MainWindow(object):
         self.letter_f.setStyleSheet("color: rgb(85, 85, 255);")
         self.letter_f.setFrameShadow(QtWidgets.QFrame.Plain)
         self.letter_f.setObjectName("letter_f")
+
         self.back_button = QtWidgets.QFrame(self.keyboard)
         self.back_button.setGeometry(QtCore.QRect(320, 10, 61, 60))
         self.back_button.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -138,6 +188,7 @@ class Ui_MainWindow(object):
         self.backspace.setStyleSheet("color: rgb(85, 85, 255);")
         self.backspace.setFrameShadow(QtWidgets.QFrame.Plain)
         self.backspace.setObjectName("backspace")
+
         self.clear_button = QtWidgets.QFrame(self.keyboard)
         self.clear_button.setGeometry(QtCore.QRect(400, 10, 61, 60))
         self.clear_button.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -155,6 +206,8 @@ class Ui_MainWindow(object):
         self.clear_Button.setStyleSheet("color: rgb(255, 0, 0);")
         self.clear_Button.setFrameShadow(QtWidgets.QFrame.Plain)
         self.clear_Button.setObjectName("clear_Button")
+        """
+
         self.word_palette = QtWidgets.QFrame(self.centralwidget)
         self.word_palette.setGeometry(QtCore.QRect(110, 390, 821, 71))
         self.word_palette.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.568, y1:0.636727, x2:1, y2:1, stop:0 rgba(201, 229, 255, 255), stop:1 rgba(255, 255, 255, 255));\n"
@@ -382,6 +435,7 @@ class Ui_MainWindow(object):
         self.cap = cv2.VideoCapture(0)
         self.timer.start(30)
 
+
 #---------------------frame update function------------------------
     def update_frame(self):
         ret, frame = self.cap.read()
@@ -402,6 +456,7 @@ class Ui_MainWindow(object):
     def update_text_area(self, text):
         """Update the text in the text area."""
         self.Text_area.setText(text)
+        
 
 #-----------highlight navigation buttons------------------------------------
     def update_highlight(self,current_btn):
@@ -414,15 +469,31 @@ class Ui_MainWindow(object):
                     btn.setStyleSheet("background-color: lightgray;")  # Default
 
 
+#-----------highlight keyboard buttons------------------------------------(not complete)
+    def update_highlight_keyboard(self,current_btn):
+        """Highlight the current key and reset others."""
+        
+        for i, row in enumerate(self.keyboard_buttons):
+            for j, button in enumerate(row):
+                if i == self.current_row and j == self.current_col:
+                    button.setStyleSheet("background-color: yellow;")  # Highlight
+                else:
+                    button.setStyleSheet("background-color: lightgray;")  # Default
+
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.letter_a.setText(_translate("MainWindow", "A"))
+
+        #self.letter_a.setText(_translate("MainWindow", "A"))
+        #these are commented to try to generate keyboard using loop
+        '''
         self.letter_s.setText(_translate("MainWindow", "S"))
         self.letter_d.setText(_translate("MainWindow", "D"))
         self.letter_f.setText(_translate("MainWindow", "F"))
         self.backspace.setText(_translate("MainWindow", "<"))
         self.clear_Button.setText(_translate("MainWindow", "C"))
+        '''
         self.word1.setText(_translate("MainWindow", "Word 1"))
         self.word2.setText(_translate("MainWindow", "Word 2"))
         self.word3.setText(_translate("MainWindow", "Word 3"))
@@ -448,6 +519,9 @@ class EyeDetection:
         self.ui = ui
 #----------current button to navigate buttons-----------------
         self.current_btn = 0
+        self.left_frame = 0
+        self.right_frame = 0
+        self.blinking_frame = 0
 
     @staticmethod
     def midpoint(p1, p2):
@@ -503,6 +577,8 @@ class EyeDetection:
         faces = self.detector(gray)
 
         for face in faces:
+            self.ui.update_highlight(self.current_btn)
+
             landmarks = self.predictor(gray, face)
 
             left_eye_ratio = self.get_blinking_ratio([36, 37, 38, 39, 40, 41], landmarks)
@@ -511,31 +587,55 @@ class EyeDetection:
 
             if blinking_ratio > 5.7:
                 cv2.putText(frame, "BLINKING", (50, 150), self.font, 3, (255, 255, 0))
-
-            gaze_ratio_left_eye = self.get_gaze_ratio([36, 37, 38, 39, 40, 41], landmarks, frame, gray)
-            gaze_ratio_right_eye = self.get_gaze_ratio([42, 43, 44, 45, 46, 47], landmarks, frame, gray)
-            gaze_ratio = (gaze_ratio_left_eye + gaze_ratio_right_eye) / 2
-
-            if gaze_ratio < 1:
-                cv2.putText(frame, "LEFT", (50, 100), self.font, 2, (0, 0, 255), 3)
-                #when left we need to do left transition over the buttons
-                self.ui.update_text_area("Looking LEFT")
-                #self.ui.update_highlight(0)
-                #btn = self.ui.up_button
-                #btn.setStyleSheet("background-color: yellow;")  # Highlight
-                if(self.current_btn !=0 ):
-                        self.current_btn-=1
-                self.ui.update_highlight(self.current_btn)
-
-            elif 1 < gaze_ratio < 3:
-                cv2.putText(frame, "CENTER", (50, 100), self.font, 2, (255, 0, 255), 3)
-                self.ui.update_highlight(self.current_btn)
+                self.blinking_frame += 1
+                if(self.blinking_frame > 10):
+                     self.ui.word1.setText(f"{self.current_btn}")
             else:
-                cv2.putText(frame, "RIGHT", (50, 100), self.font, 2, (0, 255, 255), 3)
-                self.ui.update_text_area("Looking Right")
-                if(self.current_btn <=4 ):
-                        self.current_btn+=1
-                self.ui.update_highlight(self.current_btn)
+                self.blinking_frame = 0
+                #made the gaze detection inside the else using one tab space--undo if needed
+                gaze_ratio_left_eye = self.get_gaze_ratio([36, 37, 38, 39, 40, 41], landmarks, frame, gray)
+                gaze_ratio_right_eye = self.get_gaze_ratio([42, 43, 44, 45, 46, 47], landmarks, frame, gray)
+                gaze_ratio = (gaze_ratio_left_eye + gaze_ratio_right_eye) / 2
+
+                if gaze_ratio < 1:
+                        cv2.putText(frame, "RIGHT", (50, 100), self.font, 2, (0, 0, 255), 3)
+                        #when left we need to do left transition over the buttons
+                        self.ui.update_text_area("Looking RIGHT")
+
+
+                        #moving nav btn with time lag
+                        self.left_frame = 0
+                        self.right_frame += 1
+                        if(self.right_frame>10):
+                                self.right_frame = 0
+                                if(self.current_btn <= 3 ):
+                                        self.current_btn+=1
+                
+                        '''
+                        if(self.frame_count!=0):
+                        self.frame_count=0
+                        else:
+                        self.frame_count +=1
+                        self.ui.word1.setText(f"{self.frame_count}")
+                        '''
+
+                        
+
+                elif 1 < gaze_ratio < 3:
+                        cv2.putText(frame, "CENTER", (50, 100), self.font, 2, (255, 0, 255), 3)
+                        self.left_frame = 0
+                        self.right_frame = 0
+                else:
+                        cv2.putText(frame, "LEFT", (50, 100), self.font, 2, (0, 255, 255), 3)
+                        self.ui.update_text_area("Looking LEFT")
+                        
+                        #moving nav btn with time lag
+                        self.right_frame=0
+                        self.left_frame+=1
+                        if(self.left_frame>10):
+                                self.left_frame = 0
+                                if(self.current_btn != 0):
+                                        self.current_btn-=1
 
         return frame
 
