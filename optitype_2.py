@@ -273,6 +273,7 @@ class Ui_MainWindow(object):
         self.Text_area.setFont(font)
         self.Text_area.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.Text_area.setObjectName("Text_area")
+
         self.up_button = QtWidgets.QFrame(self.centralwidget)
         self.up_button.setGeometry(QtCore.QRect(260, 309, 71, 61))
         self.up_button.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.568, y1:0.636727, x2:1, y2:1, stop:0 rgba(201, 229, 255, 255), stop:1 rgba(255, 255, 255, 255));\n"
@@ -292,6 +293,7 @@ class Ui_MainWindow(object):
         self.up_icon.setPixmap(QtGui.QPixmap("./images/up.png"))
         self.up_icon.setScaledContents(True)
         self.up_icon.setObjectName("up_icon")
+
         self.left_button = QtWidgets.QFrame(self.centralwidget)
         self.left_button.setGeometry(QtCore.QRect(350, 310, 71, 61))
         self.left_button.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.568, y1:0.636727, x2:1, y2:1, stop:0 rgba(201, 229, 255, 255), stop:1 rgba(255, 255, 255, 255));\n"
@@ -311,6 +313,7 @@ class Ui_MainWindow(object):
         self.left_icon.setPixmap(QtGui.QPixmap("./images/left.png"))
         self.left_icon.setScaledContents(True)
         self.left_icon.setObjectName("left_icon")
+        
         self.ok_button = QtWidgets.QFrame(self.centralwidget)
         self.ok_button.setGeometry(QtCore.QRect(440, 310, 71, 61))
         self.ok_button.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.568, y1:0.636727, x2:1, y2:1, stop:0 rgba(201, 229, 255, 255), stop:1 rgba(255, 255, 255, 255));\n"
@@ -332,6 +335,7 @@ class Ui_MainWindow(object):
 "")
         self.ok_icon.setAlignment(QtCore.Qt.AlignCenter)
         self.ok_icon.setObjectName("ok_icon")
+
         self.right_button = QtWidgets.QFrame(self.centralwidget)
         self.right_button.setGeometry(QtCore.QRect(530, 310, 71, 61))
         self.right_button.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.568, y1:0.636727, x2:1, y2:1, stop:0 rgba(201, 229, 255, 255), stop:1 rgba(255, 255, 255, 255));\n"
@@ -464,10 +468,19 @@ class Ui_MainWindow(object):
         self.nav = [self.up_button,self.left_button,self.ok_button,self.right_button,self.down_button]
         for i, btn in enumerate(self.nav):
                 if i == current_btn :#current_btn initialised as 0 in the constructor of eyeDetector class
-                    btn.setStyleSheet("background-color: yellow;")  # Highlight
+                        btn.setStyleSheet("background-color: blue;\n"
+                "border: 2px solid black;\n"
+                "border-radius: 20px;\n"
+                "")  # Highlight
                 else:
-                    btn.setStyleSheet("background-color: lightgray;")  # Default
-
+                        #btn.setStyleSheet("background-color: lightgray;")  # Default
+                        btn.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.568, y1:0.636727, x2:1, y2:1, stop:0 rgba(201, 229, 255, 255), stop:1 rgba(255, 255, 255, 255));\n"
+                "border: 2px solid black;\n"
+                "border-radius: 20px;\n"
+                "")
+                        btn.setFrameShape(QtWidgets.QFrame.NoFrame)
+                        btn.setFrameShadow(QtWidgets.QFrame.Plain)
+                        
 
 #-----------highlight keyboard buttons------------------------------------(not complete)
     def update_highlight_keyboard(self,current_btn):
