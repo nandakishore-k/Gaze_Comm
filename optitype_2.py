@@ -35,9 +35,12 @@ class Ui_MainWindow(object):
 
         #time counter variable
         self.time_count = 0
+
+       
         
 
     def setupUi(self):
+       
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1264, 759)
         MainWindow.setStyleSheet("\n"
@@ -659,5 +662,6 @@ if __name__ == "__main__":
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow(MainWindow)
     #ui.setupUi(MainWindow)
-    MainWindow.show()
+    MainWindow.showMaximized()  # This makes the window full-screen.
+    #MainWindow.show()
     sys.exit(app.exec_())
