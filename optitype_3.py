@@ -37,7 +37,7 @@ class Ui_MainWindow(object):
         self.logo = QtWidgets.QLabel(self.logo_frame)
         self.logo.setMaximumSize(QtCore.QSize(388, 163))
         self.logo.setStyleSheet("background-color: transparent;")
-        self.logo.setText("")
+        #self.logo.setText("")
         self.logo.setPixmap(QtGui.QPixmap("./images/logo.png"))
         self.logo.setScaledContents(True)
         self.logo.setObjectName("logo")
@@ -523,6 +523,9 @@ class Ui_MainWindow(object):
         self.letter.setObjectName("letter")
         self.gridLayout_4.addWidget(self.letter, 0, 0, 1, 1)
         self.gridLayout.addWidget(self.alpha_button, 0, 0, 1, 1)
+
+        #------------------------------------------------------------------ \
+
         self.keyb_left_down = QtWidgets.QFrame(self.keyboard_frame)
         self.keyb_left_down.setAutoFillBackground(False)
         self.keyb_left_down.setStyleSheet("\n"
@@ -532,6 +535,9 @@ class Ui_MainWindow(object):
         self.keyb_left_down.setFrameShadow(QtWidgets.QFrame.Raised)
         self.keyb_left_down.setObjectName("keyb_left_down")
         self.gridLayout.addWidget(self.keyb_left_down, 0, 3, 3, 1)
+
+        #------------------------------------------------------------------- 
+
         self.alpha_button_4 = QtWidgets.QFrame(self.keyboard_frame)
         self.alpha_button_4.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.alpha_button_4.setFrameShape(QtWidgets.QFrame.WinPanel)
@@ -566,6 +572,8 @@ class Ui_MainWindow(object):
         self.letter_a_84.setFrameShadow(QtWidgets.QFrame.Plain)
         self.letter_a_84.setObjectName("letter_a_84")
         self.gridLayout.addWidget(self.alpha_button_30, 2, 8, 1, 1)
+
+        #------------------------------------------------------------------- 
         self.keyb_left_up = QtWidgets.QFrame(self.keyboard_frame)
         self.keyb_left_up.setAutoFillBackground(False)
         self.keyb_left_up.setStyleSheet("\n"
@@ -575,6 +583,9 @@ class Ui_MainWindow(object):
         self.keyb_left_up.setFrameShadow(QtWidgets.QFrame.Raised)
         self.keyb_left_up.setObjectName("keyb_left_up")
         self.gridLayout.addWidget(self.keyb_left_up, 0, 4, 3, 1)
+
+        #------------------------------------------------------------------- 
+
         self.alpha_button_10 = QtWidgets.QFrame(self.keyboard_frame)
         self.alpha_button_10.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.alpha_button_10.setFrameShape(QtWidgets.QFrame.WinPanel)
@@ -796,6 +807,9 @@ class Ui_MainWindow(object):
         self.letter_a_94.setFrameShadow(QtWidgets.QFrame.Plain)
         self.letter_a_94.setObjectName("letter_a_94")
         self.gridLayout.addWidget(self.alpha_button_40, 2, 14, 1, 1)
+
+        #----------------------------------------------------------------------
+
         self.keyb_right_down = QtWidgets.QFrame(self.keyboard_frame)
         self.keyb_right_down.setAutoFillBackground(False)
         self.keyb_right_down.setStyleSheet("\n"
@@ -805,6 +819,9 @@ class Ui_MainWindow(object):
         self.keyb_right_down.setFrameShadow(QtWidgets.QFrame.Raised)
         self.keyb_right_down.setObjectName("keyb_right_down")
         self.gridLayout.addWidget(self.keyb_right_down, 0, 11, 3, 1)
+
+        #-------------------------------------------------------------------
+
         self.alpha_button_32 = QtWidgets.QFrame(self.keyboard_frame)
         self.alpha_button_32.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.alpha_button_32.setFrameShape(QtWidgets.QFrame.WinPanel)
@@ -839,6 +856,8 @@ class Ui_MainWindow(object):
         self.letter_a_87.setFrameShadow(QtWidgets.QFrame.Plain)
         self.letter_a_87.setObjectName("letter_a_87")
         self.gridLayout.addWidget(self.alpha_button_33, 2, 13, 1, 1)
+
+        #------------------------------------------------------------------- 
         self.keyb_right_up = QtWidgets.QFrame(self.keyboard_frame)
         self.keyb_right_up.setAutoFillBackground(False)
         self.keyb_right_up.setStyleSheet("\n"
@@ -848,6 +867,9 @@ class Ui_MainWindow(object):
         self.keyb_right_up.setFrameShadow(QtWidgets.QFrame.Raised)
         self.keyb_right_up.setObjectName("keyb_right_up")
         self.gridLayout.addWidget(self.keyb_right_up, 0, 12, 3, 1)
+
+        #------------------------------------------------------------------------- 
+
         self.alpha_button_19 = QtWidgets.QFrame(self.keyboard_frame)
         self.alpha_button_19.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.alpha_button_19.setFrameShape(QtWidgets.QFrame.WinPanel)
