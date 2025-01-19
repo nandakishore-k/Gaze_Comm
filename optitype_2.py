@@ -373,7 +373,7 @@ class Ui_MainWindow(object):
 "border: opx;\n"
 "border-radius: 0px;\n"
 "")
-        self.down_icon.setText("")
+        self.down_icon.setText("")      
         self.down_icon.setPixmap(QtGui.QPixmap("./images/down.png"))
         self.down_icon.setScaledContents(True)
         self.down_icon.setObjectName("down_icon")

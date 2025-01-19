@@ -163,9 +163,9 @@ class Ui_MainWindow(object):
 
         # OptiType keyboard layout
         self.keyboard_layout = [
-            ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],  # Row 0
-            ['J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R'],  # Row 1
-            ['S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ' ']   # Row 2
+            ['A', 'B', 'C', '', '', 'D', 'E', 'F', 'G', 'H', 'I','','', 'P','S','Y'],  # Row 0
+            ['J', 'K', '', '', '', '','L', 'M', 'N', 'O', '', '', '', '', 'Q', 'R'],  # Row 1
+            ['', 'T', '', '', '','', 'U', 'V', 'W', 'X', '', '', '', '', 'Z','']   # Row 2
         ]
 
          # Keyboard Buttons
@@ -173,7 +173,8 @@ class Ui_MainWindow(object):
         for i, row in enumerate(self.keyboard_layout):
             self.button_row = []
             for j, letter in enumerate(row):
-                if(j==3):
+                if(j==3 or j==4 or j==11 or j==12):
+                        #---------------Navigate Buttons-------------------
                         self.keyb_left_down = QtWidgets.QFrame(self.keyboard_frame)
                         self.keyb_left_down.setAutoFillBackground(False)
                         self.keyb_left_down.setStyleSheet("\n"
@@ -182,27 +183,148 @@ class Ui_MainWindow(object):
                         self.keyb_left_down.setFrameShape(QtWidgets.QFrame.StyledPanel)
                         self.keyb_left_down.setFrameShadow(QtWidgets.QFrame.Raised)
                         self.keyb_left_down.setObjectName("keyb_left_down")
-                        self.gridLayout.addWidget(self.keyb_left_down, 0, 3, 3, 1)
-                else:
-                        #---------single alpha button----------------------------
+
+                        self.label = QtWidgets.QLabel(self.keyb_left_down)
+                        self.label.setGeometry(QtCore.QRect(10, 80, 21, 31))
+                        self.label.setText("")
+                        if(j==3 or j==11):
+                                self.label.setPixmap(QtGui.QPixmap("./images/down_arrow.png"))
+                        elif(j==4 or j==12):
+                                self.label.setPixmap(QtGui.QPixmap("./images/up_arrow.png"))
+                        self.label.setScaledContents(True)
+                        self.label.setObjectName("label")
+
+                        self.gridLayout.addWidget(self.keyb_left_down, 0, j, 3, 1)
+                        
+                #elif(i==1 and (j==2 or j==13)):
+                        #---------shoot button----------------------------
+                        '''
                         self.alpha_button_26 = QtWidgets.QFrame(self.keyboard_frame)
                         self.alpha_button_26.setStyleSheet("background-color: rgb(255, 255, 255);")
                         self.alpha_button_26.setFrameShape(QtWidgets.QFrame.WinPanel)
                         self.alpha_button_26.setFrameShadow(QtWidgets.QFrame.Raised)
                         self.alpha_button_26.setLineWidth(7)
                         self.alpha_button_26.setObjectName("alpha_button_26")
+
+                        self.gridLayout_4 = QtWidgets.QGridLayout(self.alpha_button_26)
+                        self.gridLayout_4.setObjectName("gridLayout_4")
+
                         self.letter_a_29 = QtWidgets.QLabel(self.alpha_button_26)
-                        self.letter_a_29.setGeometry(QtCore.QRect(10, 10, 31, 31))
-                        font = QtGui.QFont()
-                        font.setPointSize(24)
-                        font.setBold(True)
-                        font.setWeight(75)
-                        self.letter_a_29.setFont(font)
-                        self.letter_a_29.setStyleSheet("color: rgb(17, 0, 255);")
-                        self.letter_a_29.setFrameShadow(QtWidgets.QFrame.Plain)
+                        
+                        self.letter_a_29.setGeometry(QtCore.QRect(20, 10, 36, 36))#widget.setGeometry(QtCore.QRect(x, y, width, height))
+                        #self.letter_a_29.setGeometry(QtCore.QRect(10, 10, 1, 1))
+                        if(j==2):
+                                self.letter_a_29.setPixmap(QtGui.QPixmap("./images/shoot_right.png"))
+                        else:
+                                 self.letter_a_29.setPixmap(QtGui.QPixmap("./images/shoot_left.png"))
+                        self.letter_a_29.setAlignment(QtCore.Qt.AlignCenter)
+
                         self.letter_a_29.setObjectName("letter_a_29")
+                        self.letter_a_29.setScaledContents(True)
+                        #self.gridLayout_4.addWidget(self.letter_a_29, 0, 0, 1, 1)
                         self.gridLayout.addWidget(self.alpha_button_26, i, j, 1, 1)#gridLayout.addWidget(widget, row, column, rowSpan, columnSpan)
                         self.letter_a_29.setText(letter)
+
+                        '''
+                else:
+                        
+                        
+ 
+                        self.alpha_button_26 = QtWidgets.QFrame(self.keyboard_frame)
+                        self.alpha_button_26.setStyleSheet("background-color: rgb(255, 255, 255);")
+                        self.alpha_button_26.setFrameShape(QtWidgets.QFrame.WinPanel)
+                        self.alpha_button_26.setFrameShadow(QtWidgets.QFrame.Raised)
+                        self.alpha_button_26.setLineWidth(7)
+                        self.alpha_button_26.setObjectName("alpha_button_26")
+
+                        self.gridLayout_4 = QtWidgets.QGridLayout(self.alpha_button_26)
+                        self.gridLayout_4.setObjectName("gridLayout_4")
+
+                        self.letter_a_29 = QtWidgets.QLabel(self.alpha_button_26)
+
+                        if(i==1 and (j==2 or j==13)):
+                                #---------shoot button----------------------------
+
+                                self.letter_a_29.setGeometry(QtCore.QRect(20, 10, 36, 36))#widget.setGeometry(QtCore.QRect(x, y, width, height))
+                                #self.letter_a_29.setGeometry(QtCore.QRect(10, 10, 1, 1))
+                                if(j==2):
+                                        self.letter_a_29.setPixmap(QtGui.QPixmap("./images/shoot_right.png"))
+                                else:
+                                        self.letter_a_29.setPixmap(QtGui.QPixmap("./images/shoot_left.png"))
+                                self.letter_a_29.setAlignment(QtCore.Qt.AlignCenter)
+
+                                self.letter_a_29.setObjectName("letter_a_29")
+                                self.letter_a_29.setScaledContents(True)
+                                #self.gridLayout_4.addWidget(self.letter_a_29, 0, 0, 1, 1)
+                                self.gridLayout.addWidget(self.alpha_button_26, i, j, 1, 1)#gridLayout.addWidget(widget, row, column, rowSpan, columnSpan)
+                                
+
+                        elif(i==2 and (j==0 or j==15)):
+
+                                self.letter_a_29.setGeometry(QtCore.QRect(20, 10, 36, 36))#widget.setGeometry(QtCore.QRect(x, y, width, height))
+                                #self.letter_a_29.setGeometry(QtCore.QRect(10, 10, 1, 1))
+                                
+                                self.letter_a_29.setPixmap(QtGui.QPixmap("./images/clr.png"))
+                                
+
+                                self.letter_a_29.setObjectName("letter_a_29")
+                                self.letter_a_29.setScaledContents(True)
+                                #self.gridLayout_4.addWidget(self.letter_a_29, 0, 0, 1, 1)
+                                self.gridLayout.addWidget(self.alpha_button_26, i, j, 1, 1)#gridLayout.addWidget(widget, row, column, rowSpan, columnSpan)
+                                                               
+                        elif(i==2 and (j==2 or j==13)):
+                                self.letter_a_29.setGeometry(QtCore.QRect(20, 10, 36, 36))#widget.setGeometry(QtCore.QRect(x, y, width, height))
+                                #self.letter_a_29.setGeometry(QtCore.QRect(10, 10, 1, 1))
+                                
+                                self.letter_a_29.setPixmap(QtGui.QPixmap("./images/voice_btn.png"))
+                                
+
+                                self.letter_a_29.setObjectName("letter_a_29")
+                                self.letter_a_29.setScaledContents(True)
+                                #self.gridLayout_4.addWidget(self.letter_a_29, 0, 0, 1, 1)
+                                self.gridLayout.addWidget(self.alpha_button_26, i, j, 1, 1)#gridLayout.addWidget(widget, row, column, rowSpan, columnSpan)
+                        elif(i==2 and (j==5 or j==10)):
+                                self.letter_a_29.setGeometry(QtCore.QRect(20, 10, 36, 36))#widget.setGeometry(QtCore.QRect(x, y, width, height))
+                                #self.letter_a_29.setGeometry(QtCore.QRect(10, 10, 1, 1))
+                                
+                                self.letter_a_29.setPixmap(QtGui.QPixmap("./images/back.png"))
+                                
+
+                                self.letter_a_29.setObjectName("letter_a_29")
+                                self.letter_a_29.setScaledContents(True)
+                                #self.gridLayout_4.addWidget(self.letter_a_29, 0, 0, 1, 1)
+                                self.gridLayout.addWidget(self.alpha_button_26, i, j, 1, 1)#gridLayout.addWidget(widget, row, column, rowSpan, columnSpan)
+                        elif(i==1 and (j==5 or j==10)):
+                                self.letter_a_29.setGeometry(QtCore.QRect(20, 10, 36, 36))#widget.setGeometry(QtCore.QRect(x, y, width, height))
+                                #self.letter_a_29.setGeometry(QtCore.QRect(10, 10, 1, 1))
+                                
+                                self.letter_a_29.setPixmap(QtGui.QPixmap("./images/space.png"))
+                                
+
+                                self.letter_a_29.setObjectName("letter_a_29")
+                                self.letter_a_29.setScaledContents(True)
+                                #self.gridLayout_4.addWidget(self.letter_a_29, 0, 0, 1, 1)
+                                self.gridLayout.addWidget(self.alpha_button_26, i, j, 1, 1)#gridLayout.addWidget(widget, row, column, rowSpan, columnSpan)
+                                
+                        else:
+                                #---------single alpha button----------------------------
+
+                                self.letter_a_29.setGeometry(QtCore.QRect(10, 10, 31, 31))
+                                font = QtGui.QFont()
+                                font.setPointSize(24)
+                                font.setBold(True)
+                                font.setWeight(75)
+                                self.letter_a_29.setFont(font)
+                                self.letter_a_29.setStyleSheet("color: rgb(17, 0, 255);")
+                                self.letter_a_29.setFrameShadow(QtWidgets.QFrame.Plain)
+
+                                self.letter_a_29.setAlignment(QtCore.Qt.AlignCenter)
+
+                                self.letter_a_29.setObjectName("letter_a_29")
+                                self.gridLayout_4.addWidget(self.letter_a_29, 0, 0, 1, 1)
+                                self.gridLayout.addWidget(self.alpha_button_26, i, j, 1, 1)#gridLayout.addWidget(widget, row, column, rowSpan, columnSpan)
+                                self.letter_a_29.setText(letter)
+
 
                         #---------single alpha button ends ----------------------------
             self.keyboard_buttons.append(self.button_row)
@@ -412,6 +534,7 @@ class Ui_MainWindow(object):
         self.letter_a_20.setFrameShadow(QtWidgets.QFrame.Plain)
         self.letter_a_20.setObjectName("letter_a_20")
         self.gridLayout.addWidget(self.alpha_button_20, 2, 0, 1, 1)
+
         self.right_shoot = QtWidgets.QFrame(self.keyboard_frame)
         self.right_shoot.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.right_shoot.setFrameShape(QtWidgets.QFrame.WinPanel)
@@ -514,6 +637,8 @@ class Ui_MainWindow(object):
         self.letter_a_16.setFrameShadow(QtWidgets.QFrame.Plain)
         self.letter_a_16.setObjectName("letter_a_16")
         self.gridLayout.addWidget(self.left_shoot, 1, 2, 1, 1)
+        #--------------------------------------------------------------
+
         self.alpha_button = QtWidgets.QFrame(self.keyboard_frame)
         self.alpha_button.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.alpha_button.setFrameShape(QtWidgets.QFrame.WinPanel)
