@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1459</width>
-    <height>1121</height>
+    <width>1384</width>
+    <height>957</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0.329545, x2:1, y2:0, sto
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_8" stretch="1,80">
     <item>
-     <widget class="QFrame" name="frame_3">
+     <widget class="QFrame" name="logo_frame">
       <property name="styleSheet">
        <string notr="true">background-color: transparent;</string>
       </property>
@@ -31,8 +31,34 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0.329545, x2:1, y2:0, sto
        <enum>QFrame::Raised</enum>
       </property>
       <layout class="QGridLayout" name="gridLayout_3" rowstretch="20,1,20" columnstretch="20,1,20">
+       <item row="1" column="2">
+        <spacer name="logo_hspacer1">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>451</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="2" column="1">
+        <spacer name="logo_vspacer2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>1</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
        <item row="0" column="1">
-        <spacer name="verticalSpacer">
+        <spacer name="logo_vspacer1">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -44,21 +70,14 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0.329545, x2:1, y2:0, sto
          </property>
         </spacer>
        </item>
-       <item row="1" column="0">
-        <spacer name="horizontalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
+       <item row="1" column="1">
+        <widget class="QLabel" name="logo">
+         <property name="maximumSize">
           <size>
-           <width>40</width>
-           <height>20</height>
+           <width>388</width>
+           <height>163</height>
           </size>
          </property>
-        </spacer>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLabel" name="label_2">
          <property name="styleSheet">
           <string notr="true">background-color: transparent;</string>
          </property>
@@ -73,28 +92,15 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0.329545, x2:1, y2:0, sto
          </property>
         </widget>
        </item>
-       <item row="1" column="2">
-        <spacer name="horizontalSpacer_2">
+       <item row="1" column="0">
+        <spacer name="logo_hspacer2">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>451</width>
+           <width>40</width>
            <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="2" column="1">
-        <spacer name="verticalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>1</height>
           </size>
          </property>
         </spacer>
@@ -103,7 +109,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0.329545, x2:1, y2:0, sto
      </widget>
     </item>
     <item>
-     <widget class="QFrame" name="frame_12">
+     <widget class="QFrame" name="functional_frame">
       <property name="styleSheet">
        <string notr="true">background-color: transparent;</string>
       </property>
@@ -115,7 +121,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0.329545, x2:1, y2:0, sto
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
-        <widget class="QFrame" name="frame_5">
+        <widget class="QFrame" name="left_active_frame_parent">
          <property name="styleSheet">
           <string notr="true">background-color: transparent;</string>
          </property>
@@ -127,7 +133,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0.329545, x2:1, y2:0, sto
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
-           <spacer name="verticalSpacer_4">
+           <spacer name="left_active_vspacer1">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
@@ -140,7 +146,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0.329545, x2:1, y2:0, sto
            </spacer>
           </item>
           <item>
-           <widget class="QFrame" name="Text_Display_2">
+           <widget class="QFrame" name="left_active_frame">
             <property name="enabled">
              <bool>true</bool>
             </property>
@@ -155,7 +161,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0.329545, x2:1, y2:0, sto
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_4">
              <item>
-              <widget class="QLabel" name="Text_area_2">
+              <widget class="QLabel" name="left_active">
                <property name="font">
                 <font>
                  <pointsize>17</pointsize>
@@ -170,7 +176,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0.329545, x2:1, y2:0, sto
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="letter_a_3">
+              <widget class="QLabel" name="left_active_letter">
                <property name="font">
                 <font>
                  <pointsize>24</pointsize>
@@ -196,7 +202,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0.329545, x2:1, y2:0, sto
            </widget>
           </item>
           <item>
-           <spacer name="verticalSpacer_5">
+           <spacer name="left_active_vspacer2">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
@@ -212,7 +218,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0.329545, x2:1, y2:0, sto
         </widget>
        </item>
        <item>
-        <widget class="QFrame" name="frame_4">
+        <widget class="QFrame" name="keyb_text_camera_frame">
          <property name="styleSheet">
           <string notr="true">background-color: transparent;</string>
          </property>
@@ -224,7 +230,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0.329545, x2:1, y2:0, sto
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2" stretch="10,1,25">
           <item>
-           <widget class="QFrame" name="frame_2">
+           <widget class="QFrame" name="text_camera_frame">
             <property name="styleSheet">
              <string notr="true">background-color: transparent;</string>
             </property>
@@ -236,7 +242,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0.329545, x2:1, y2:0, sto
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="20,0,5">
              <item>
-              <widget class="QFrame" name="Text_Display">
+              <widget class="QFrame" name="text_area_frame">
                <property name="styleSheet">
                 <string notr="true">background-color: rgb(255, 255, 255);</string>
                </property>
@@ -246,13 +252,13 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0.329545, x2:1, y2:0, sto
                <property name="frameShadow">
                 <enum>QFrame::Raised</enum>
                </property>
-               <widget class="QLabel" name="Text_area">
+               <widget class="QLabel" name="text_area">
                 <property name="geometry">
                  <rect>
                   <x>20</x>
-                  <y>40</y>
-                  <width>781</width>
-                  <height>111</height>
+                  <y>20</y>
+                  <width>1141</width>
+                  <height>131</height>
                  </rect>
                 </property>
                 <property name="font">
@@ -270,7 +276,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0.329545, x2:1, y2:0, sto
               </widget>
              </item>
              <item>
-              <spacer name="horizontalSpacer">
+              <spacer name="text_camera_hspacer">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
@@ -283,7 +289,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0.329545, x2:1, y2:0, sto
               </spacer>
              </item>
              <item>
-              <widget class="QFrame" name="frame">
+              <widget class="QFrame" name="camera_frame">
                <property name="styleSheet">
                 <string notr="true">background-color: rgb(0, 0, 0);</string>
                </property>
@@ -299,7 +305,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0.329545, x2:1, y2:0, sto
            </widget>
           </item>
           <item>
-           <spacer name="verticalSpacer_3">
+           <spacer name="text_area_vspacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
@@ -312,7 +318,13 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0.329545, x2:1, y2:0, sto
            </spacer>
           </item>
           <item>
-           <widget class="QFrame" name="frame_11">
+           <widget class="QFrame" name="keyb_frame">
+            <property name="minimumSize">
+             <size>
+              <width>1172</width>
+              <height>447</height>
+             </size>
+            </property>
             <property name="styleSheet">
              <string notr="true">
 background-color: rgb(209, 209, 209);
@@ -326,7 +338,7 @@ border-radius: 20px;</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_2" rowstretch="1,5,1">
              <item row="1" column="0">
-              <widget class="QFrame" name="keyboard">
+              <widget class="QFrame" name="keyboard_frame">
                <property name="styleSheet">
                 <string notr="true">
 background-color: qlineargradient(spread:pad, x1:0.568, y1:0.636727, x2:1, y2:1, stop:0 rgba(201, 229, 255, 255), stop:1 rgba(255, 255, 255, 255));
@@ -899,7 +911,7 @@ border-radius: 20px;</string>
                  </widget>
                 </item>
                 <item row="1" column="13">
-                 <widget class="QFrame" name="alpha_button_44">
+                 <widget class="QFrame" name="right_shoot">
                   <property name="styleSheet">
                    <string notr="true">background-color: rgb(255, 255, 255);</string>
                   </property>
@@ -1109,7 +1121,7 @@ border-radius: 20px;</string>
                  </widget>
                 </item>
                 <item row="1" column="2">
-                 <widget class="QFrame" name="alpha_button_16">
+                 <widget class="QFrame" name="left_shoot">
                   <property name="styleSheet">
                    <string notr="true">background-color: rgb(255, 255, 255);</string>
                   </property>
@@ -1166,7 +1178,7 @@ border-radius: 20px;</string>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_4">
                    <item row="0" column="0">
-                    <widget class="QLabel" name="letter_a">
+                    <widget class="QLabel" name="letter">
                      <property name="font">
                       <font>
                        <pointsize>24</pointsize>
@@ -1192,7 +1204,7 @@ border-radius: 20px;</string>
                  </widget>
                 </item>
                 <item row="0" column="3" rowspan="3">
-                 <widget class="QFrame" name="frame_7">
+                 <widget class="QFrame" name="keyb_left_down">
                   <property name="autoFillBackground">
                    <bool>false</bool>
                   </property>
@@ -1294,7 +1306,7 @@ border-radius: 20px;</string>
                  </widget>
                 </item>
                 <item row="0" column="4" rowspan="3">
-                 <widget class="QFrame" name="frame_8">
+                 <widget class="QFrame" name="keyb_left_up">
                   <property name="autoFillBackground">
                    <bool>false</bool>
                   </property>
@@ -1354,7 +1366,7 @@ border-radius: 20px;</string>
                  </widget>
                 </item>
                 <item row="0" column="1">
-                 <widget class="QFrame" name="alpha_button_2">
+                 <widget class="QFrame" name="frame_13">
                   <property name="styleSheet">
                    <string notr="true">background-color: rgb(255, 255, 255);</string>
                   </property>
@@ -1732,7 +1744,7 @@ border-radius: 20px;</string>
                  </widget>
                 </item>
                 <item row="0" column="5">
-                 <widget class="QFrame" name="alpha_button_9">
+                 <widget class="QFrame" name="alpha_button_2">
                   <property name="styleSheet">
                    <string notr="true">background-color: rgb(255, 255, 255);</string>
                   </property>
@@ -1858,7 +1870,7 @@ border-radius: 20px;</string>
                  </widget>
                 </item>
                 <item row="0" column="11" rowspan="3">
-                 <widget class="QFrame" name="frame_9">
+                 <widget class="QFrame" name="keyb_right_down">
                   <property name="autoFillBackground">
                    <bool>false</bool>
                   </property>
@@ -1960,7 +1972,7 @@ border-radius: 20px;</string>
                  </widget>
                 </item>
                 <item row="0" column="12" rowspan="3">
-                 <widget class="QFrame" name="frame_10">
+                 <widget class="QFrame" name="keyb_right_up">
                   <property name="autoFillBackground">
                    <bool>false</bool>
                   </property>
@@ -2023,7 +2035,7 @@ border-radius: 20px;</string>
               </widget>
              </item>
              <item row="2" column="0">
-              <widget class="QFrame" name="frame_20">
+              <widget class="QFrame" name="prediction_frame">
                <property name="styleSheet">
                 <string notr="true">background-color: transparent;</string>
                </property>
@@ -2035,7 +2047,7 @@ border-radius: 20px;</string>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_3">
                 <item>
-                 <widget class="QFrame" name="word_palette_3">
+                 <widget class="QFrame" name="prediction_palette">
                   <property name="styleSheet">
                    <string notr="true">background-color: qlineargradient(spread:pad, x1:0.568, y1:0.636727, x2:1, y2:1, stop:0 rgba(201, 229, 255, 255), stop:1 rgba(255, 255, 255, 255));
 border-bottom-color: rgb(255, 255, 255);
@@ -2049,7 +2061,7 @@ border-radius: 20px;</string>
                   </property>
                   <layout class="QHBoxLayout" name="horizontalLayout_3">
                    <item>
-                    <widget class="QLabel" name="word1_4">
+                    <widget class="QLabel" name="pred_word1">
                      <property name="enabled">
                       <bool>true</bool>
                      </property>
@@ -2072,7 +2084,7 @@ border-radius: 20px;</string>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="word2_4">
+                    <widget class="QLabel" name="pred_word2">
                      <property name="enabled">
                       <bool>true</bool>
                      </property>
@@ -2095,7 +2107,7 @@ border-radius: 20px;</string>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="word3_4">
+                    <widget class="QLabel" name="pred_word3">
                      <property name="enabled">
                       <bool>true</bool>
                      </property>
@@ -2118,7 +2130,7 @@ border-radius: 20px;</string>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="word4_4">
+                    <widget class="QLabel" name="pred_word4">
                      <property name="enabled">
                       <bool>true</bool>
                      </property>
@@ -2144,7 +2156,7 @@ border-radius: 20px;</string>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="label_22">
+                 <widget class="QLabel" name="prediction_label">
                   <property name="font">
                    <font>
                     <pointsize>12</pointsize>
@@ -2165,7 +2177,7 @@ border-radius: 20px;</string>
               </widget>
              </item>
              <item row="0" column="0">
-              <widget class="QFrame" name="frame_19">
+              <widget class="QFrame" name="word_completion_frame">
                <property name="styleSheet">
                 <string notr="true">background-color: transparent;</string>
                </property>
@@ -2177,7 +2189,7 @@ border-radius: 20px;</string>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout">
                 <item>
-                 <widget class="QLabel" name="label_8">
+                 <widget class="QLabel" name="word_completion_label">
                   <property name="font">
                    <font>
                     <pointsize>12</pointsize>
@@ -2195,7 +2207,7 @@ border-radius: 20px;</string>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QFrame" name="word_palette">
+                 <widget class="QFrame" name="word_completion_palette">
                   <property name="styleSheet">
                    <string notr="true">background-color: qlineargradient(spread:pad, x1:0.568, y1:0.636727, x2:1, y2:1, stop:0 rgba(201, 229, 255, 255), stop:1 rgba(255, 255, 255, 255));
 border-bottom-color: rgb(255, 255, 255);
@@ -2209,7 +2221,7 @@ border-radius: 20px;</string>
                   </property>
                   <layout class="QHBoxLayout" name="horizontalLayout">
                    <item>
-                    <widget class="QLabel" name="word1">
+                    <widget class="QLabel" name="compl_word1">
                      <property name="enabled">
                       <bool>true</bool>
                      </property>
@@ -2232,7 +2244,7 @@ border-radius: 20px;</string>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="word2">
+                    <widget class="QLabel" name="compl_word2">
                      <property name="enabled">
                       <bool>true</bool>
                      </property>
@@ -2255,7 +2267,7 @@ border-radius: 20px;</string>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="word3">
+                    <widget class="QLabel" name="compl_word3">
                      <property name="enabled">
                       <bool>true</bool>
                      </property>
@@ -2278,7 +2290,7 @@ border-radius: 20px;</string>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="word4">
+                    <widget class="QLabel" name="compl_word4">
                      <property name="enabled">
                       <bool>true</bool>
                      </property>
@@ -2313,7 +2325,7 @@ border-radius: 20px;</string>
         </widget>
        </item>
        <item>
-        <widget class="QFrame" name="frame_6">
+        <widget class="QFrame" name="right_active_frame_parent">
          <property name="styleSheet">
           <string notr="true">background-color: transparent;</string>
          </property>
@@ -2325,7 +2337,7 @@ border-radius: 20px;</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_6">
           <item>
-           <spacer name="verticalSpacer_6">
+           <spacer name="right_active_vspacer2">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
@@ -2338,7 +2350,7 @@ border-radius: 20px;</string>
            </spacer>
           </item>
           <item>
-           <widget class="QFrame" name="Text_Display_3">
+           <widget class="QFrame" name="right_ctive_frame">
             <property name="enabled">
              <bool>true</bool>
             </property>
@@ -2353,7 +2365,7 @@ border-radius: 20px;</string>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_7">
              <item>
-              <widget class="QLabel" name="Text_area_3">
+              <widget class="QLabel" name="right_active_2">
                <property name="font">
                 <font>
                  <pointsize>17</pointsize>
@@ -2368,7 +2380,7 @@ border-radius: 20px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="letter_a_4">
+              <widget class="QLabel" name="right_active_letter_2">
                <property name="font">
                 <font>
                  <pointsize>24</pointsize>
@@ -2394,7 +2406,7 @@ border-radius: 20px;</string>
            </widget>
           </item>
           <item>
-           <spacer name="verticalSpacer_7">
+           <spacer name="right_active_vspacer1">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
@@ -2413,22 +2425,6 @@ border-radius: 20px;</string>
      </widget>
     </item>
    </layout>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1459</width>
-     <height>26</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menud2d2d2d2d2d2">
-    <property name="title">
-     <string>Assist</string>
-    </property>
-   </widget>
-   <addaction name="menud2d2d2d2d2d2"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
