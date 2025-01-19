@@ -173,27 +173,38 @@ class Ui_MainWindow(object):
         for i, row in enumerate(self.keyboard_layout):
             self.button_row = []
             for j, letter in enumerate(row):
-                #---------single alpha button----------------------------
-                self.alpha_button_26 = QtWidgets.QFrame(self.keyboard_frame)
-                self.alpha_button_26.setStyleSheet("background-color: rgb(255, 255, 255);")
-                self.alpha_button_26.setFrameShape(QtWidgets.QFrame.WinPanel)
-                self.alpha_button_26.setFrameShadow(QtWidgets.QFrame.Raised)
-                self.alpha_button_26.setLineWidth(7)
-                self.alpha_button_26.setObjectName("alpha_button_26")
-                self.letter_a_29 = QtWidgets.QLabel(self.alpha_button_26)
-                self.letter_a_29.setGeometry(QtCore.QRect(10, 10, 31, 31))
-                font = QtGui.QFont()
-                font.setPointSize(24)
-                font.setBold(True)
-                font.setWeight(75)
-                self.letter_a_29.setFont(font)
-                self.letter_a_29.setStyleSheet("color: rgb(17, 0, 255);")
-                self.letter_a_29.setFrameShadow(QtWidgets.QFrame.Plain)
-                self.letter_a_29.setObjectName("letter_a_29")
-                self.gridLayout.addWidget(self.alpha_button_26, i, j, 1, 1)#gridLayout.addWidget(widget, row, column, rowSpan, columnSpan)
-                self.letter_a_29.setText(letter)
+                if(j==3):
+                        self.keyb_left_down = QtWidgets.QFrame(self.keyboard_frame)
+                        self.keyb_left_down.setAutoFillBackground(False)
+                        self.keyb_left_down.setStyleSheet("\n"
+                "background-color: white;\n"
+                "border-radius: 20px;")
+                        self.keyb_left_down.setFrameShape(QtWidgets.QFrame.StyledPanel)
+                        self.keyb_left_down.setFrameShadow(QtWidgets.QFrame.Raised)
+                        self.keyb_left_down.setObjectName("keyb_left_down")
+                        self.gridLayout.addWidget(self.keyb_left_down, 0, 3, 3, 1)
+                else:
+                        #---------single alpha button----------------------------
+                        self.alpha_button_26 = QtWidgets.QFrame(self.keyboard_frame)
+                        self.alpha_button_26.setStyleSheet("background-color: rgb(255, 255, 255);")
+                        self.alpha_button_26.setFrameShape(QtWidgets.QFrame.WinPanel)
+                        self.alpha_button_26.setFrameShadow(QtWidgets.QFrame.Raised)
+                        self.alpha_button_26.setLineWidth(7)
+                        self.alpha_button_26.setObjectName("alpha_button_26")
+                        self.letter_a_29 = QtWidgets.QLabel(self.alpha_button_26)
+                        self.letter_a_29.setGeometry(QtCore.QRect(10, 10, 31, 31))
+                        font = QtGui.QFont()
+                        font.setPointSize(24)
+                        font.setBold(True)
+                        font.setWeight(75)
+                        self.letter_a_29.setFont(font)
+                        self.letter_a_29.setStyleSheet("color: rgb(17, 0, 255);")
+                        self.letter_a_29.setFrameShadow(QtWidgets.QFrame.Plain)
+                        self.letter_a_29.setObjectName("letter_a_29")
+                        self.gridLayout.addWidget(self.alpha_button_26, i, j, 1, 1)#gridLayout.addWidget(widget, row, column, rowSpan, columnSpan)
+                        self.letter_a_29.setText(letter)
 
-                #---------single alpha button ends ----------------------------
+                        #---------single alpha button ends ----------------------------
             self.keyboard_buttons.append(self.button_row)
 
         '''
