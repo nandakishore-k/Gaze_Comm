@@ -163,9 +163,9 @@ class Ui_MainWindow(object):
 
         # OptiType keyboard layout
         self.keyboard_layout = [
-            ['A', 'B', 'C', '', '', 'D', 'E', 'F', 'G', 'H', 'I','','', 'P','S','Y'],  # Row 0
-            ['J', 'K', '', '', '', '','L', 'M', 'N', 'O', '', '', '', '', 'Q', 'R'],  # Row 1
-            ['', 'T', '', '', '','', 'U', 'V', 'W', 'X', '', '', '', '', 'Z','']   # Row 2
+            ['Q', 'W', 'E', '', '', 'R', 'T', 'Y', 'U', 'I', 'O','','', 'P','K','L'],  # Row 0
+            ['Z', 'A', '', '', '', '','S', 'D', 'F', 'G', '', '', '', '', 'H', 'J'],  # Row 1
+            ['', 'X', '', '', '','', 'C', 'V', 'B', 'N', '', '', '', '', 'M','']   # Row 2
         ]
 
          # Keyboard Buttons
