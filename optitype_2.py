@@ -34,7 +34,7 @@ class Ui_MainWindow(object):
         self.MainWindow = MainWindow
 
         #time counter variable
-        self.time_count = 0
+        #self.time_count = 0
 
        
         
@@ -410,16 +410,14 @@ class Ui_MainWindow(object):
         self.video_view.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.video_view.setFrameShadow(QtWidgets.QFrame.Raised)
         self.video_view.setObjectName("video_view")
+
         self.label = QtWidgets.QLabel(self.video_view)
         self.label.setGeometry(QtCore.QRect(20, 40, 281, 191))
         self.label.setStyleSheet("border: 2px solid black;\n"
 "    background-color: #f0f0f0;")
         self.label.setText("")
-
-        #########################################################
-
-
         self.label.setObjectName("label")
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1264, 26))
