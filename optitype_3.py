@@ -156,7 +156,8 @@ class Ui_MainWindow(object):
         self.camera_frame.setStyleSheet("border: 2px solid black;\n"
 "    background-color: #f0f0f0;")
         self.camera_frame.setText("")
-        self.camera_frame.setMaximumSize(QtCore.QSize(400,250,))
+        #self.camera_frame.setMaximumSize(QtCore.QSize(400,250,))
+        self.camera_frame.setFixedSize(300, 200)
         self.camera_frame.setObjectName("camera_frame")
 
         self.horizontalLayout_2.addWidget(self.camera_frame)
