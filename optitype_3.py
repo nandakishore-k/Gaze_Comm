@@ -332,7 +332,7 @@ class Ui_MainWindow(object):
 
                         #---------single alpha button ends ----------------------------
             self.keyboard_buttons.append(self.button_row)
-        print(self.keyboard_buttons)
+        
 
         
         self.gridLayout.setColumnStretch(0, 2)
