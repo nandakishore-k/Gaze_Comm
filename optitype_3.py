@@ -26,6 +26,9 @@ class Ui_MainWindow(object):
 
         # Initialize EyeDetection with reference to this UI
         self.eye_detector = EyeDetection("shape_predictor_68_face_landmarks.dat",self)
+        #self.k_row = 0 #for keyboard row
+        self.current_row = 0
+        self.current_col = 0
 
         self.setupUi()
         self.MainWindow = MainWindow
@@ -81,6 +84,8 @@ class Ui_MainWindow(object):
         self.left_active_frame_parent.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.left_active_frame_parent.setFrameShadow(QtWidgets.QFrame.Raised)
         self.left_active_frame_parent.setObjectName("left_active_frame_parent")
+        self.left_active_frame_parent.setMinimumSize(QtCore.QSize(150, 100))
+
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.left_active_frame_parent)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         spacerItem4 = QtWidgets.QSpacerItem(20, 175, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
@@ -214,15 +219,15 @@ class Ui_MainWindow(object):
                         self.nav_button.setFrameShadow(QtWidgets.QFrame.Raised)
                         self.nav_button.setObjectName("keyb_left_down")
 
-                        self.label = QtWidgets.QLabel(self.nav_button)
-                        self.label.setGeometry(QtCore.QRect(10, 80, 21, 31))
-                        self.label.setText("")
+                        self.letter = QtWidgets.QLabel(self.nav_button)
+                        self.letter.setGeometry(QtCore.QRect(10, 80, 21, 31))
+                        self.letter.setText("")
                         if(j==3 or j==11):
-                                self.label.setPixmap(QtGui.QPixmap("./images/down_arrow.png"))
+                                self.letter.setPixmap(QtGui.QPixmap("./images/down_arrow.png"))
                         elif(j==4 or j==12):
-                                self.label.setPixmap(QtGui.QPixmap("./images/up_arrow.png"))
-                        self.label.setScaledContents(True)
-                        self.label.setObjectName("label")
+                                self.letter.setPixmap(QtGui.QPixmap("./images/up_arrow.png"))
+                        self.letter.setScaledContents(True)
+                        self.letter.setObjectName("label")
 
                         self.gridLayout.addWidget(self.nav_button, 0, j, 3, 1)
                         self.button_row.append(self.nav_button)
@@ -505,6 +510,7 @@ class Ui_MainWindow(object):
         self.right_active_frame_parent.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.right_active_frame_parent.setFrameShadow(QtWidgets.QFrame.Raised)
         self.right_active_frame_parent.setObjectName("right_active_frame_parent")
+        self.right_active_frame_parent.setMinimumSize(QtCore.QSize(150, 100))
         self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.right_active_frame_parent)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
         spacerItem8 = QtWidgets.QSpacerItem(20, 239, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
@@ -517,24 +523,24 @@ class Ui_MainWindow(object):
         self.right_ctive_frame.setObjectName("right_ctive_frame")
         self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.right_ctive_frame)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
-        self.right_active_2 = QtWidgets.QLabel(self.right_ctive_frame)
+        self.right_active = QtWidgets.QLabel(self.right_ctive_frame)
         font = QtGui.QFont()
         font.setPointSize(17)
-        self.right_active_2.setFont(font)
-        self.right_active_2.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
-        self.right_active_2.setObjectName("right_active_2")
-        self.verticalLayout_7.addWidget(self.right_active_2)
-        self.right_active_letter_2 = QtWidgets.QLabel(self.right_ctive_frame)
+        self.right_active.setFont(font)
+        self.right_active.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+        self.right_active.setObjectName("right_active_2")
+        self.verticalLayout_7.addWidget(self.right_active)
+        self.right_active_letter = QtWidgets.QLabel(self.right_ctive_frame)
         font = QtGui.QFont()
         font.setPointSize(24)
         font.setBold(True)
         font.setWeight(75)
-        self.right_active_letter_2.setFont(font)
-        self.right_active_letter_2.setStyleSheet("color: rgb(85, 85, 255);")
-        self.right_active_letter_2.setFrameShadow(QtWidgets.QFrame.Plain)
-        self.right_active_letter_2.setAlignment(QtCore.Qt.AlignCenter)
-        self.right_active_letter_2.setObjectName("right_active_letter_2")
-        self.verticalLayout_7.addWidget(self.right_active_letter_2)
+        self.right_active_letter.setFont(font)
+        self.right_active_letter.setStyleSheet("color: rgb(85, 85, 255);")
+        self.right_active_letter.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.right_active_letter.setAlignment(QtCore.Qt.AlignCenter)
+        self.right_active_letter.setObjectName("right_active_letter_2")
+        self.verticalLayout_7.addWidget(self.right_active_letter)
         self.verticalLayout_6.addWidget(self.right_ctive_frame)
         spacerItem9 = QtWidgets.QSpacerItem(20, 238, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_6.addItem(spacerItem9)
@@ -553,9 +559,9 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.left_active.setText(_translate("MainWindow", "left"))
+        self.left_active.setText(_translate("MainWindow", "CENTER"))
         self.left_active_letter.setText(_translate("MainWindow", "A"))
-        self.text_area.setText(_translate("MainWindow", "Your text will be displayed here.."))
+        self.text_area.setText(_translate("MainWindow", "Typed Text Here..."))
         #self.letter_a_29.setText(_translate("MainWindow", "C"))
         '''
         self.letter_a_88.setText(_translate("MainWindow", "F"))
@@ -607,12 +613,13 @@ class Ui_MainWindow(object):
         self.compl_word2.setText(_translate("MainWindow", "Word 2"))
         self.compl_word3.setText(_translate("MainWindow", "Word 3"))
         self.compl_word4.setText(_translate("MainWindow", "Word 4"))
-        self.right_active_2.setText(_translate("MainWindow", "left"))
-        self.right_active_letter_2.setText(_translate("MainWindow", "A"))
+        self.right_active.setText(_translate("MainWindow", "CENTER"))
+        self.right_active_letter.setText(_translate("MainWindow", "A"))
 
         #----------------setting timer----------------------
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_frame)
+        self.timer.timeout.connect(self.update_highlight)
         self.cap = cv2.VideoCapture(0)
         self.timer.start(30)
 
@@ -637,16 +644,48 @@ class Ui_MainWindow(object):
                 print(f"Error in update_frame: {e}")
 
 #-----------highlight keyboard buttons------------------------------------(not complete)
-    def update_highlight(self,k_col):
+    def update_highlight(self):
         """Highlight the current key and reset others."""
         nav_keys = [3,4,11,12]
-        
         for i, row in enumerate(self.keyboard_buttons):
             for j, button in enumerate(row):
-                if (i == 0 and j == k_col) or (j==k_col and k_col in nav_keys):
+                if (i == self.current_row and j == self.current_col) or (j==self.current_col and self.current_col in nav_keys):
                         button.setStyleSheet("background-color: yellow;")  # Highlight
                 else:
                         button.setStyleSheet("background-color: white;")  # Default
+
+#-----------move key---------------------------------------
+    def move_key(self,direction):
+        if(direction == "l" and self.current_col > 0):
+              self.current_col -= 1
+        elif(direction == "r" and self.current_col < 15):
+              self.current_col += 1
+
+
+#-------------------left right active update--------------------------
+    def update_active(self,direction): 
+        current_button = self.keyboard_layout[self.current_row][self.current_col]
+        self.right_active.setText(direction)
+        self.right_active_letter.setText(current_button)
+        self.left_active.setText(direction)
+        self.left_active_letter.setText(current_button)
+
+#------------------select key ----------------------------------------
+    def select_key(self):
+        if((self.current_col in [3,11]) and (self.current_row < 2)):#down button
+              self.current_row += 1
+              self.current_col -= 1
+        elif((self.current_col in [4,12]) and (self.current_row > 0)):#up button
+              self.current_row -= 1
+              self.current_col += 1
+        else:#alpha button
+                """Select the highlighted key and append it to the text area."""
+                selected_key = self.keyboard_layout[self.current_row][self.current_col]
+                current_text = self.text_area.text()
+                if current_text == "Typed Text Here...":
+                        current_text = ""  # Clear the placeholder text
+                self.text_area.setText(current_text + selected_key)
+
 
 
 
@@ -658,8 +697,6 @@ class EyeDetection:
         self.font = cv2.FONT_HERSHEY_COMPLEX
 #--------------initiating ui-------------------------------
         self.ui = ui
-#----------current button to navigate buttons-----------------
-        self.k_col = 0
 
         self.left_frame = 0
         self.right_frame = 0
@@ -712,14 +749,14 @@ class EyeDetection:
         left_side_white = cv2.countNonZero(left_side_threshold)
         right_side_white = cv2.countNonZero(right_side_threshold)
 
-        return left_side_white / (right_side_white + 0.000000001)
+        return left_side_white / (right_side_white + 0.000000001)#i did that to solve division by zero
 
     def process_frame(self, frame):
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = self.detector(gray)
 
         for face in faces:
-            self.ui.update_highlight(self.k_col)
+            #self.ui.update_highlight(self.k_col)
 
             landmarks = self.predictor(gray, face)
 
@@ -730,6 +767,12 @@ class EyeDetection:
             if blinking_ratio > 5.7:
                 cv2.putText(frame, "BLINKING", (50, 150), self.font, 3, (255, 255, 0))
                 self.blinking_frame += 1
+
+                #self.blinking_frame += 1
+                if(self.blinking_frame==10):
+                        #self.blinking_frame = 0
+                        self.ui.select_key()
+
                 #if(self.blinking_frame > 10):
                      #self.ui.word1.setText(f"{self.current_btn}")
             else:
@@ -750,16 +793,9 @@ class EyeDetection:
                         self.right_frame += 1
                         if(self.right_frame>10):
                                 self.right_frame = 0
-                                if(self.k_col <= 15 ):
-                                        self.k_col+=1
+                                self.ui.move_key("r")
                 
-                        '''
-                        if(self.frame_count!=0):
-                        self.frame_count=0
-                        else:
-                        self.frame_count +=1
-                        self.ui.word1.setText(f"{self.frame_count}")
-                        '''
+                        self.ui.update_active("RIGHT")
 
                         
 
@@ -767,17 +803,18 @@ class EyeDetection:
                         cv2.putText(frame, "CENTER", (50, 100), self.font, 2, (255, 0, 255), 3)
                         self.left_frame = 0
                         self.right_frame = 0
+                        self.ui.update_active("CENTER")
                 else:
                         cv2.putText(frame, "LEFT", (50, 100), self.font, 2, (0, 255, 255), 3)
                         #self.ui.update_text_area("Looking LEFT")
+                        self.ui.update_active("LEFT")
                         
                         #moving nav btn with time lag
                         self.right_frame=0
                         self.left_frame+=1
                         if(self.left_frame>10):
                                 self.left_frame = 0
-                                if(self.k_col != 0):
-                                        self.k_col-=1
+                                self.ui.move_key("l")
 
         return frame
 
