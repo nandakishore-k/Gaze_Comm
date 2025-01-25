@@ -19,6 +19,9 @@ import numpy as np
 import dlib
 from math import hypot
 
+#---------------voice---------------------------------
+import pyttsx3
+
 
 class Ui_MainWindow(object):
     def __init__(self,MainWindow):
@@ -199,7 +202,7 @@ class Ui_MainWindow(object):
         # OptiType keyboard layout
         self.keyboard_layout = [
             ['Q', 'W', 'E', '', '', 'R', 'T', 'Y', 'U', 'I', 'O','','', 'P','K','L'],  # Row 0
-            ['Z', 'A', '', '', '', '','S', 'D', 'F', 'G', '', '', '', '', 'H', 'J'],  # Row 1
+            ['Z', 'A', '', '', '', ' ','S', 'D', 'F', 'G', ' ', '', '', '', 'H', 'J'],  # Row 1
             ['', 'X', '', '', '','', 'C', 'V', 'B', 'N', '', '', '', '', 'M','']   # Row 2
         ]
 
@@ -670,18 +673,58 @@ class Ui_MainWindow(object):
         self.left_active.setText(direction)
         self.left_active_letter.setText(current_button)
 
+
+#------------------------speak----------------------------------------
+
+    def speak(self, sentence):
+        #sentence = """Kishore is a rare gem—a tech maestro and programming virtuoso whose brilliance transforms challenges into triumphs. Beyond his unmatched technical expertise, he embodies the perfect balance of intellect and emotion, with a romantic heart and an inspiring presence. Admirable, humble, and visionary, Kishore lights up the world with his genius and charm."""
+
+        # Initialize
+        engine = pyttsx3.init()
+
+        # Adjust properties
+        rate = engine.getProperty('rate')  # Get the current speaking rate
+        engine.setProperty('rate', 150)    # Set new speaking rate (words per minute)
+
+        volume = engine.getProperty('volume')  # Get the current volume level (0.0 to 1.0)
+        engine.setProperty('volume', 0.9)      # Set new volume (90%)
+
+        voices = engine.getProperty('voices')  # Get available voices
+        engine.setProperty('voice', voices[1].id)  # Set the voice (0: Male, 1: Female)
+
+        # Unfortunately, pyttsx3 does not have a built-in property for pitch. However, you can use workarounds by modifying the voice settings if supported.
+
+        # Speak the sentence
+        engine.say(sentence)
+        engine.runAndWait()
+
+
 #------------------select key ----------------------------------------
     def select_key(self):
+        current_text = self.text_area.text()#current text
+
         if((self.current_col in [3,11]) and (self.current_row < 2)):#down button
               self.current_row += 1
               self.current_col -= 1
         elif((self.current_col in [4,12]) and (self.current_row > 0)):#up button
               self.current_row -= 1
               self.current_col += 1
-        else:#alpha button
+        elif((self.current_row == 1) and(self.current_col in [2,13])):#shoot
+                if(self.current_col == 2):
+                      self.current_col = 13
+                else:
+                      self.current_col = 2
+        elif((self.current_row == 2) and(self.current_col in [5,10])):#back    
+                self.text_area.setText(current_text[:-1])
+        elif((self.current_row == 2) and(self.current_col in [0,15])):#clr 
+                self.text_area.setText("") 
+        elif((self.current_row == 2) and(self.current_col in [2,13])):#enter
+                self.speak(current_text)
+                self.text_area.setText("")   
+        else:#alpha button and space
                 """Select the highlighted key and append it to the text area."""
                 selected_key = self.keyboard_layout[self.current_row][self.current_col]
-                current_text = self.text_area.text()
+                
                 if current_text == "Typed Text Here...":
                         current_text = ""  # Clear the placeholder text
                 self.text_area.setText(current_text + selected_key)
