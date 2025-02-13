@@ -25,6 +25,11 @@ import pyttsx3
 #-------------Word completion------------------------------------
 from heapq import heappush, heappop
 
+#-----------Next word prediction---------------------------------
+from collections import defaultdict, Counter
+from nltk.corpus import brown
+import nltk
+
 
 
 
@@ -91,6 +96,33 @@ for word in word_list:
     trie.insert(word.lower())
 
 #===========================================================================
+#________________Next word prediction_______________________________________
+class Nxw_predictor():
+    def __init__(self):
+        nltk.data.path.append("nltk_data")
+
+        # Build a bigram model from the Brown corpus.
+        self.bigram_model = defaultdict(Counter)
+
+        for sentence in brown.sents():
+            # Lowercase all words and add a special start token if desired.
+            sentence = [word.lower() for word in sentence]
+            for i in range(len(sentence) - 1):
+                current_word = sentence[i]
+                next_word = sentence[i + 1]
+                self.bigram_model[current_word][next_word] += 1
+
+    def predict_next_word(self,last_word, top_n=4):
+        """
+        Given the last word, return a list of top_n most likely next words.
+        """
+        suggestions = self.bigram_model.get(last_word.lower(), {})
+        most_common = suggestions.most_common(top_n)
+        return [word for word, count in most_common]
+
+    # Example:
+    def run(self):
+        print("Predictions for 'the':", self.predict_next_word("the"))
 
 
 class Ui_MainWindow(object):
@@ -106,8 +138,8 @@ class Ui_MainWindow(object):
         self.setupUi()
         self.MainWindow = MainWindow
 
-        # Connect text area change
-        #self.text_area.textChanged.connect(self.update_predictions)
+        self.nxw_p = Nxw_predictor()#next word prediction class object
+        #self.nxw_p.run()
 
     def setupUi(self):
         MainWindow.setObjectName("MainWindow")
@@ -225,13 +257,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addWidget(self.text_area_frame)
         spacerItem6 = QtWidgets.QSpacerItem(50, 148, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem6)
-        '''
-        self.camera_frame = QtWidgets.QFrame(self.text_camera_frame)
-        self.camera_frame.setStyleSheet("background-color: rgb(0, 0, 0);")
-        self.camera_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.camera_frame.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.camera_frame.setObjectName("camera_frame")
-        '''
+        
         self.camera_frame = QtWidgets.QLabel(self.text_camera_frame)
         self.camera_frame.setGeometry(QtCore.QRect(20, 40, 281, 191))
         self.camera_frame.setStyleSheet("border: 2px solid black;\n"
@@ -527,6 +553,7 @@ class Ui_MainWindow(object):
         self.word_completion_palette.setObjectName("word_completion_palette")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.word_completion_palette)
         self.horizontalLayout.setObjectName("horizontalLayout")
+
         self.compl_word1 = QtWidgets.QLabel(self.word_completion_palette)
         self.compl_word1.setEnabled(True)
         font = QtGui.QFont()
@@ -638,53 +665,13 @@ class Ui_MainWindow(object):
         self.left_active.setText(_translate("MainWindow", "CENTER"))
         self.left_active_letter.setText(_translate("MainWindow", "A"))
         self.text_area.setText(_translate("MainWindow", "Typed Text Here..."))
-        #self.letter_a_29.setText(_translate("MainWindow", "C"))
-        '''
-        self.letter_a_88.setText(_translate("MainWindow", "F"))
-        self.letter_a_93.setText(_translate("MainWindow", "A"))
-        self.letter_a_21.setText(_translate("MainWindow", "S"))
-        self.letter_a_92.setText(_translate("MainWindow", "A"))
-        self.letter_a_5.setText(_translate("MainWindow", "D"))
-        self.letter_a_9.setText(_translate("MainWindow", "D"))
-        self.letter_a_10.setText(_translate("MainWindow", "A"))
-        self.letter_a_28.setText(_translate("MainWindow", "<"))
-        self.letter_a_89.setText(_translate("MainWindow", "C"))
-        self.letter_a_26.setText(_translate("MainWindow", "C"))
-        self.letter_a_82.setText(_translate("MainWindow", "<"))
-        self.letter_a_20.setText(_translate("MainWindow", "A"))
-        self.letter_a_98.setText(_translate("MainWindow", "<"))
-        self.letter_a_30.setText(_translate("MainWindow", "v"))
-        self.letter_a_27.setText(_translate("MainWindow", "F"))
-        self.letter_a_18.setText(_translate("MainWindow", "S"))
-        self.letter_a_25.setText(_translate("MainWindow", "<"))
-        self.letter_a_16.setText(_translate("MainWindow", "D"))
-        self.letter.setText(_translate("MainWindow", "A"))
-        self.letter_a_6.setText(_translate("MainWindow", "F"))
-        self.letter_a_84.setText(_translate("MainWindow", "A"))
-        self.letter_a_12.setText(_translate("MainWindow", "C"))
-        self.letter_a_2.setText(_translate("MainWindow", "S"))
-        self.letter_a_17.setText(_translate("MainWindow", "A"))
-        self.letter_a_85.setText(_translate("MainWindow", "D"))
-        self.letter_a_81.setText(_translate("MainWindow", "D"))
-        self.letter_a_95.setText(_translate("MainWindow", "S"))
-        self.letter_a_91.setText(_translate("MainWindow", "S"))
-        self.letter_a_97.setText(_translate("MainWindow", "C"))
-        self.letter_a_96.setText(_translate("MainWindow", "S"))
-        self.letter_a_83.setText(_translate("MainWindow", "A"))
-        self.letter_a_11.setText(_translate("MainWindow", "<"))
-        self.letter_a_90.setText(_translate("MainWindow", "F"))
-        self.letter_a_94.setText(_translate("MainWindow", "C"))
-        self.letter_a_86.setText(_translate("MainWindow", "F"))
-        self.letter_a_87.setText(_translate("MainWindow", "<"))
-        self.letter_a_19.setText(_translate("MainWindow", "D"))
-
-        '''
+        
         self.pred_word1.setText(_translate("MainWindow", "Word 1"))
         self.pred_word2.setText(_translate("MainWindow", "Word 2"))
         self.pred_word3.setText(_translate("MainWindow", "Word 3"))
         self.pred_word4.setText(_translate("MainWindow", "Word 4"))
-        self.prediction_label.setText(_translate("MainWindow", "Next Word Prediction"))
-        self.word_completion_label.setText(_translate("MainWindow", "Word completion"))
+        self.prediction_label.setText(_translate("MainWindow", "Next Word Suggestion"))
+        self.word_completion_label.setText(_translate("MainWindow", "Word completion Suggestion"))
         self.compl_word1.setText(_translate("MainWindow", "Word 1"))
         self.compl_word2.setText(_translate("MainWindow", "Word 2"))
         self.compl_word3.setText(_translate("MainWindow", "Word 3"))
@@ -723,28 +710,48 @@ class Ui_MainWindow(object):
     def update_highlight(self):
         """Highlight the current key and reset others."""
         nav_keys = [3,4,11,12]
-        for i, row in enumerate(self.keyboard_buttons):
-            for j, button in enumerate(row):
-                if (i == self.current_row and j == self.current_col) or (j==self.current_col and self.current_col in nav_keys):
-                        button.setStyleSheet("background-color: yellow;")  # Highlight
-                else:
-                        button.setStyleSheet("background-color: white;")  # Default
+        if(self.current_row in [-1,3]):
+            self.update_highlight_suggestion()
+        else:
+            for i, row in enumerate(self.keyboard_buttons):
+                for j, button in enumerate(row):
+                    if (i == self.current_row and j == self.current_col) or (j==self.current_col and self.current_col in nav_keys):
+                            button.setStyleSheet("background-color: yellow;")  # Highlight
+                    else:
+                            button.setStyleSheet("background-color: white;")  # Default
 
+#----------------highlight suggestion palette----------------------------------------
+    def update_highlight_suggestion(self):
+        """Highlight the current key and reset others."""
+        completion_buttons = [self.compl_word1,self.compl_word2,self.compl_word3,self.compl_word4]
+        prediction_buttons = [self.pred_word1,self.pred_word2,self.pred_word3,self.pred_word4]
+        
+        buttons = completion_buttons if (self.current_row == -1) else prediction_buttons
+
+        for i,button in enumerate(buttons):
+            if(i==self.current_col):
+                button.setStyleSheet("background-color: yellow;")  # Highlight
+            else:
+                button.setStyleSheet("background-color: transparent;")  # Default
 #-----------move key---------------------------------------
     def move_key(self,direction):
-        if(direction == "l" and self.current_col > 0):
+        length = 4 if self.current_row in [-1,3] else 16
+        if(direction == "l" ):
               self.current_col -= 1
-        elif(direction == "r" and self.current_col < 15):
-              self.current_col += 1
+              if(self.current_col < 0):
+                self.current_col = length-1
+        elif(direction == "r" ):
+              self.current_col = (self.current_col + 1)%length
 
 
-#-------------------left right active update--------------------------
+#-------------------left right active update-----------------------------------
     def update_active(self,direction): 
-        current_button = self.keyboard_layout[self.current_row][self.current_col]
-        self.right_active.setText(direction)
-        self.right_active_letter.setText(current_button)
-        self.left_active.setText(direction)
-        self.left_active_letter.setText(current_button)
+        if self.current_row not in [-1,3]:
+            current_button = self.keyboard_layout[self.current_row][self.current_col]
+            self.right_active.setText(direction)
+            self.right_active_letter.setText(current_button)
+            self.left_active.setText(direction)
+            self.left_active_letter.setText(current_button)
 
 
 #------------------------speak----------------------------------------
@@ -775,18 +782,38 @@ class Ui_MainWindow(object):
 #------------------select key ----------------------------------------
     def select_key(self):
         current_text = self.text_area.text()#current text
+        completion_buttons = [self.compl_word1,self.compl_word2,self.compl_word3,self.compl_word4]
+        prediction_buttons = [self.pred_word1,self.pred_word2,self.pred_word3,self.pred_word4]
+        
 
-        if((self.current_col in [3,11]) and (self.current_row < 2)):#down button
+        if((self.current_col in [3,11]) and (self.current_row < 3)):#down button
               self.current_row += 1
               self.current_col -= 1
-        elif((self.current_col in [4,12]) and (self.current_row > 0)):#up button
+              if(self.current_row == 3):
+                self.current_col = 0 
+
+        elif((self.current_col in [4,12]) and (self.current_row > -1)):#up button
               self.current_row -= 1
               self.current_col += 1
+              if(self.current_row == -1):
+                self.current_col = 0
+
+        elif(self.current_row in [-1,3]):#suggestion
+                buttons = completion_buttons if (self.current_row == -1) else prediction_buttons
+                selected_word = buttons[self.current_col].text()
+                processed_text = current_text.split()[:-1]
+                processed_text = (" ").join(processed_text)
+                self.text_area.setText(processed_text + " " + selected_word + " ")
+
+                self.current_col = 0
+                self.current_row = 0 if (self.current_row == -1) else 2
+
         elif((self.current_row == 1) and(self.current_col in [2,13])):#shoot
                 if(self.current_col == 2):
                       self.current_col = 13
                 else:
                       self.current_col = 2
+                      
         elif((self.current_row == 2) and(self.current_col in [5,10])):#back    
                 self.text_area.setText(current_text[:-1])
         elif((self.current_row == 2) and(self.current_col in [0,15])):#clr 
@@ -803,24 +830,44 @@ class Ui_MainWindow(object):
                 self.text_area.setText(current_text + selected_key)
 
         self.update_completion()
+        self.update_nxw()
 
 
-#----------------Word_completion-------------------------------------
+#----------------update Word_completion-------------------------------------
     def update_completion(self):
         """Fetch and update predictions dynamically."""
         prefix = self.text_area.text().lower().split()[-1]
         if prefix:
             suggestions = trie.search(prefix)
-            self.compl_word1.setText(suggestions[0])
-            self.compl_word2.setText(suggestions[1])
-            self.compl_word3.setText(suggestions[2])
-            self.compl_word4.setText(suggestions[3])
+        else:
+            suggestions = ['-----','-----','-----','-----']
+        self.compl_word1.setText(suggestions[0])
+        self.compl_word2.setText(suggestions[1])
+        self.compl_word3.setText(suggestions[2])
+        self.compl_word4.setText(suggestions[3])
             #self.prediction_label.setText(f"Predictions: {', '.join(suggestions)}")
         #else:
             #self.prediction_label.setText("Predictions: ")
 
+#-----------------update next word--------------------------------------------
+    def update_nxw(self):
+        text = self.text_area.text()
+        if(text[-1] == ' '):
+            last_word = text.lower().split()[-1]
+            if(last_word):
+                suggestions = self.nxw_p.predict_next_word(last_word)
+            else:
+                suggestions = ['-----','-----','-----','-----']
+            self.pred_word1.setText(suggestions[0])
+            self.pred_word2.setText(suggestions[1])
+            self.pred_word3.setText(suggestions[2])
+            self.pred_word4.setText(suggestions[3])
+        
 
-#------------Eye Detection Class------------------------------
+
+
+#______________________EYE DETECTION CLASS________________________________________
+
 class EyeDetection:
     def __init__(self, shape_predictor_path, ui):
         self.detector = dlib.get_frontal_face_detector()

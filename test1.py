@@ -1,3 +1,4 @@
-import nltk
-nltk.data.path.append("H:\\Main_Project\\nltk_data")
-nltk.download("brown", download_dir="H:\\Main_Project\\nltk_data")
+current_text = "hello world i am nice"
+processed_text = current_text.split()[:-1]
+processed_text = (" ").join(processed_text)
+print(processed_text)

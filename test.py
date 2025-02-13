@@ -1,5 +1,8 @@
 from collections import defaultdict, Counter
 from nltk.corpus import brown
+import nltk
+
+nltk.data.path.append(r"H:\Main_Project\nltk_data")
 
 # Build a bigram model from the Brown corpus.
 bigram_model = defaultdict(Counter)
