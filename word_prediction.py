@@ -61,6 +61,6 @@ for word in word_list:
 typ = ""
 while(typ != "x"):
     typ = input()
-    prefix = typ
+    prefix = typ.strip().split()[-1]
     suggestions = trie.search(prefix)
     print(f"Suggestions for '{prefix}':", suggestions)
