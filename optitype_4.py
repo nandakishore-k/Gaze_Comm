@@ -116,8 +116,8 @@ class Nxw_predictor():
         """
         Given the last word, return a list of top_n most likely next words.
         """
-        self.suggestions = self.bigram_model.get(last_word.lower(), Counter())
-        most_common = self.suggestions.most_common(top_n)
+        suggestions = self.bigram_model.get(last_word.lower(), Counter())
+        most_common = suggestions.most_common(top_n)
         return [word for word, count in most_common]
 
     # Example:
@@ -144,8 +144,7 @@ class Ui_MainWindow(object):
     def setupUi(self):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1384, 957)
-        MainWindow.setStyleSheet("\n"
-"background-color: qlineargradient(spread:pad, x1:0, y1:0.329545, x2:1, y2:0, stop:0.0894737 rgba(0, 117, 184, 255), stop:0.884211 rgba(255, 255, 255, 255));")
+        MainWindow.setStyleSheet("\n""background-color: rgb(1, 63, 130);\n")        
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout_8 = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -276,22 +275,18 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addItem(spacerItem7)
         self.keyb_frame = QtWidgets.QFrame(self.keyb_text_camera_frame)
         self.keyb_frame.setMinimumSize(QtCore.QSize(1172, 447))
-        self.keyb_frame.setStyleSheet("\n"
-"background-color: rgb(209, 209, 209);\n"
-"border-radius: 20px;")
+        self.keyb_frame.setStyleSheet("\nbackground-color: transparent;\nborder-radius: 20px;")
         self.keyb_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.keyb_frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.keyb_frame.setObjectName("keyb_frame")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.keyb_frame)
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.keyboard_frame = QtWidgets.QFrame(self.keyb_frame)
-        self.keyboard_frame.setStyleSheet("\n"
-"background-color: qlineargradient(spread:pad, x1:0.568, y1:0.636727, x2:1, y2:1, stop:0 rgba(201, 229, 255, 255), stop:1 rgba(255, 255, 255, 255));\n"
-"\n"
-"border-radius: 20px;")
+        self.keyboard_frame.setStyleSheet("background-color: transparent;\\nborder-bottom-color: rgb(255, 255, 255);\\nborder-radius: 25px;\\nborder: 2px solid white;\\n")
         self.keyboard_frame.setFrameShape(QtWidgets.QFrame.WinPanel)
         self.keyboard_frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.keyboard_frame.setObjectName("keyboard_frame")
+        self.keyboard_frame.setMinimumHeight(210)
         self.gridLayout = QtWidgets.QGridLayout(self.keyboard_frame)
         self.gridLayout.setObjectName("gridLayout")
 
@@ -316,7 +311,7 @@ class Ui_MainWindow(object):
                         self.nav_button.setAutoFillBackground(False)
                         self.nav_button.setStyleSheet("\n"
                 "background-color: white;\n"
-                "border-radius: 20px;")
+                "border-radius: 15px;")
                         self.nav_button.setFrameShape(QtWidgets.QFrame.StyledPanel)
                         self.nav_button.setFrameShadow(QtWidgets.QFrame.Raised)
                         self.nav_button.setObjectName("keyb_left_down")
@@ -329,6 +324,8 @@ class Ui_MainWindow(object):
                         elif(j==4 or j==12):
                                 self.letter.setPixmap(QtGui.QPixmap("./images/up_arrow.png"))
                         self.letter.setScaledContents(True)
+
+                        self.letter.setStyleSheet("color: rgb(255, 255, 255);\nbackground-color: transparent;\nborder-radius: 0px;\nborder: 0px ;\n")
                         self.letter.setObjectName("label")
 
                         self.gridLayout.addWidget(self.nav_button, 0, j, 3, 1)
@@ -337,11 +334,12 @@ class Ui_MainWindow(object):
                 else:
  
                         self.alpha_button = QtWidgets.QFrame(self.keyboard_frame)
-                        self.alpha_button.setStyleSheet("background-color: rgb(255, 255, 255);")
+                        self.alpha_button.setStyleSheet("background-color: transparent;\nborder-radius: 25px;\nborder: 2px solid white;\n")
                         self.alpha_button.setFrameShape(QtWidgets.QFrame.WinPanel)
                         self.alpha_button.setFrameShadow(QtWidgets.QFrame.Raised)
                         self.alpha_button.setLineWidth(7)
                         self.alpha_button.setObjectName("alpha_button")
+                        self.alpha_button.setMinimumHeight(60)
 
                         self.gridLayout_4 = QtWidgets.QGridLayout(self.alpha_button)
                         self.gridLayout_4.setObjectName("gridLayout_4")
@@ -358,7 +356,8 @@ class Ui_MainWindow(object):
                                 else:
                                         self.letter.setPixmap(QtGui.QPixmap("./images/shoot_left.png"))
                                 self.letter.setAlignment(QtCore.Qt.AlignCenter)
-
+                                self.letter.setStyleSheet("color: rgb(255, 255, 255);\nbackground-color: transparent;\nborder-radius: 0px;\nborder: 0px ;\n")
+                                
                                 self.letter.setObjectName("letter_a_29")
                                 self.letter.setScaledContents(True)
                                 #self.gridLayout_4.addWidget(self.letter_a_29, 0, 0, 1, 1)
@@ -372,7 +371,7 @@ class Ui_MainWindow(object):
                                 #self.letter_a_29.setGeometry(QtCore.QRect(10, 10, 1, 1))
                                 
                                 self.letter.setPixmap(QtGui.QPixmap("./images/clr.png"))
-                                
+                                self.letter.setStyleSheet("color: rgb(255, 255, 255);\nbackground-color: transparent;\nborder-radius: 0px;\nborder: 0px ;\n")
 
                                 self.letter.setObjectName("letter_a_29")
                                 self.letter.setScaledContents(True)
@@ -386,7 +385,7 @@ class Ui_MainWindow(object):
                                 #self.letter_a_29.setGeometry(QtCore.QRect(10, 10, 1, 1))
                                 
                                 self.letter.setPixmap(QtGui.QPixmap("./images/voice_btn.png"))
-                                
+                                self.letter.setStyleSheet("color: rgb(255, 255, 255);\nbackground-color: transparent;\nborder-radius: 0px;\nborder: 0px ;\n")
 
                                 self.letter.setObjectName("letter_a_29")
                                 self.letter.setScaledContents(True)
@@ -399,7 +398,7 @@ class Ui_MainWindow(object):
                                 #self.letter_a_29.setGeometry(QtCore.QRect(10, 10, 1, 1))
                                 
                                 self.letter.setPixmap(QtGui.QPixmap("./images/back.png"))
-                                
+                                self.letter.setStyleSheet("color: rgb(255, 255, 255);\nbackground-color: transparent;\nborder-radius: 0px;\nborder: 0px ;\n")
 
                                 self.letter.setObjectName("letter_a_29")
                                 self.letter.setScaledContents(True)
@@ -410,7 +409,7 @@ class Ui_MainWindow(object):
                                 #self.letter_a_29.setGeometry(QtCore.QRect(10, 10, 1, 1))
                                 
                                 self.letter.setPixmap(QtGui.QPixmap("./images/space.png"))
-                                
+                                self.letter.setStyleSheet("color: rgb(255, 255, 255);\nbackground-color: transparent;\nborder-radius: 0px;\nborder: 0px ;\n")
 
                                 self.letter.setObjectName("letter_a_29")
                                 self.letter.setScaledContents(True)
@@ -426,7 +425,7 @@ class Ui_MainWindow(object):
                                 font.setBold(True)
                                 font.setWeight(75)
                                 self.letter.setFont(font)
-                                self.letter.setStyleSheet("color: rgb(17, 0, 255);")
+                                self.letter.setStyleSheet("color: rgb(255, 255, 255);\nbackground-color: transparent;\nborder-radius: 0px;\nborder: 0px ;\n")
                                 self.letter.setFrameShadow(QtWidgets.QFrame.Plain)
 
                                 self.letter.setAlignment(QtCore.Qt.AlignCenter)
@@ -467,9 +466,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.prediction_frame)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.prediction_palette = QtWidgets.QFrame(self.prediction_frame)
-        self.prediction_palette.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.568, y1:0.636727, x2:1, y2:1, stop:0 rgba(201, 229, 255, 255), stop:1 rgba(255, 255, 255, 255));\n"
-"border-bottom-color: rgb(255, 255, 255);\n"
-"border-radius: 20px;")
+        self.prediction_palette.setStyleSheet("background-color: transparent;\nborder-radius: 25px;\nborder: 2px solid white;\n")
         self.prediction_palette.setFrameShape(QtWidgets.QFrame.WinPanel)
         self.prediction_palette.setFrameShadow(QtWidgets.QFrame.Raised)
         self.prediction_palette.setObjectName("prediction_palette")
@@ -523,8 +520,16 @@ class Ui_MainWindow(object):
         self.prediction_label = QtWidgets.QLabel(self.prediction_frame)
         font = QtGui.QFont()
         font.setPointSize(12)
+
+        #------------------
+        self.pred_word1.setStyleSheet("background-color: transparent;\ncolor:white;\nborder:0px;")
+        self.pred_word2.setStyleSheet("background-color: transparent;\ncolor:white;\nborder:0px;")
+        self.pred_word3.setStyleSheet("background-color: transparent;\ncolor:white;\nborder:0px;")
+        self.pred_word4.setStyleSheet("background-color: transparent;\ncolor:white;\nborder:0px;")
+        #------------------
+
         self.prediction_label.setFont(font)
-        self.prediction_label.setStyleSheet("background-color: transparent;")
+        self.prediction_label.setStyleSheet("\ncolor:white;")
         self.prediction_label.setAlignment(QtCore.Qt.AlignCenter)
         self.prediction_label.setObjectName("prediction_label")
         self.verticalLayout_3.addWidget(self.prediction_label)
@@ -540,14 +545,12 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.word_completion_label.setFont(font)
-        self.word_completion_label.setStyleSheet("background-color: transparent;")
+        self.word_completion_label.setStyleSheet("\ncolor:white;")
         self.word_completion_label.setAlignment(QtCore.Qt.AlignCenter)
         self.word_completion_label.setObjectName("word_completion_label")
         self.verticalLayout.addWidget(self.word_completion_label)
         self.word_completion_palette = QtWidgets.QFrame(self.word_completion_frame)
-        self.word_completion_palette.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.568, y1:0.636727, x2:1, y2:1, stop:0 rgba(201, 229, 255, 255), stop:1 rgba(255, 255, 255, 255));\n"
-"border-bottom-color: rgb(255, 255, 255);\n"
-"border-radius: 20px;")
+        self.word_completion_palette.setStyleSheet("background-color: transparent;\nborder-radius: 25px;\nborder: 2px solid white;\n")
         self.word_completion_palette.setFrameShape(QtWidgets.QFrame.WinPanel)
         self.word_completion_palette.setFrameShadow(QtWidgets.QFrame.Raised)
         self.word_completion_palette.setObjectName("word_completion_palette")
@@ -598,6 +601,12 @@ class Ui_MainWindow(object):
         self.compl_word4.setAlignment(QtCore.Qt.AlignCenter)
         self.compl_word4.setObjectName("compl_word4")
         self.horizontalLayout.addWidget(self.compl_word4)
+        #------------------
+        self.compl_word1.setStyleSheet("background-color: transparent;\ncolor:white;\nborder:0px;")
+        self.compl_word2.setStyleSheet("background-color: transparent;\ncolor:white;\nborder:0px;")
+        self.compl_word3.setStyleSheet("background-color: transparent;\ncolor:white;\nborder:0px;")
+        self.compl_word4.setStyleSheet("background-color: transparent;\ncolor:white;\nborder:0px;")
+        #------------------
         self.verticalLayout.addWidget(self.word_completion_palette)
         self.gridLayout_2.addWidget(self.word_completion_frame, 0, 0, 1, 1)
         self.gridLayout_2.setRowStretch(0, 1)
@@ -703,47 +712,38 @@ class Ui_MainWindow(object):
                         h, w, ch = frame.shape
                         qimg = QImage(frame.data, w, h, ch * w, QImage.Format_RGB888)
                         self.camera_frame.setPixmap(QPixmap.fromImage(qimg))
-
-                        
         except Exception as e:
                 print(f"Error in update_frame: {e}")
 
 #-----------highlight keyboard buttons------------------------------------(not complete)
     def update_highlight(self):
         """Highlight the current key and reset others."""
-        try:
-            nav_keys = [3,4,11,12]
-            if(self.current_row in [-1,3]):
-                self.update_highlight_suggestion()
-            else:
-                for i, row in enumerate(self.keyboard_buttons):
-                    for j, button in enumerate(row):
-                        if (i == self.current_row and j == self.current_col) or (j==self.current_col and self.current_col in nav_keys):
-                                button.setStyleSheet("background-color: yellow;")  # Highlight
-                        else:
-                                button.setStyleSheet("background-color: white;")  # Default
-        except Exception as e:
-                print(f"Error in update_highlight: {e}")
+        nav_keys = [3,4,11,12]
+        if(self.current_row in [-1,3]):
+            self.update_highlight_suggestion()
+        else:
+            for i, row in enumerate(self.keyboard_buttons):
+                for j, button in enumerate(row):
+                    if (i == self.current_row and j == self.current_col) or (j==self.current_col and self.current_col in nav_keys):
+                            button.setStyleSheet("background-color: yellow;")  # Highlight
+                    else:
+                            button.setStyleSheet("background-color: transparent;\nborder-radius: 25px;\nborder: 2px solid white;\n")  # Default
 
 #----------------highlight suggestion palette----------------------------------------
     def update_highlight_suggestion(self):
         """Highlight the current key and reset others."""
-        try:
-            completion_buttons = [self.compl_word1,self.compl_word2,self.compl_word3,self.compl_word4]
-            prediction_buttons = [self.pred_word1,self.pred_word2,self.pred_word3,self.pred_word4]
-            
-            buttons = completion_buttons if (self.current_row == -1) else prediction_buttons
+        completion_buttons = [self.compl_word1,self.compl_word2,self.compl_word3,self.compl_word4]
+        prediction_buttons = [self.pred_word1,self.pred_word2,self.pred_word3,self.pred_word4]
+        
+        buttons = completion_buttons if (self.current_row == -1) else prediction_buttons
 
-            for i,button in enumerate(buttons):
-                if(i==self.current_col):
-                    button.setStyleSheet("background-color: yellow;")  # Highlight
-                else:
-                    button.setStyleSheet("background-color: transparent;")  # Default
-        except Exception as e:
-                print(f"Error in update_highlight_suggestion: {e}")
+        for i,button in enumerate(buttons):
+            if(i==self.current_col):
+                button.setStyleSheet("background-color: yellow;")  # Highlight
+            else:
+                button.setStyleSheet("background-color: transparent;")  # Default
 #-----------move key---------------------------------------
     def move_key(self,direction):
-        print(self.current_row,self.current_col)
         length = 4 if self.current_row in [-1,3] else 16
         if(direction == "l" ):
               self.current_col -= 1
@@ -790,40 +790,34 @@ class Ui_MainWindow(object):
 
 #------------------select key ----------------------------------------
     def select_key(self):
-        try:
-            current_text = self.text_area.text()#current text
-            completion_buttons = [self.compl_word1,self.compl_word2,self.compl_word3,self.compl_word4]
-            prediction_buttons = [self.pred_word1,self.pred_word2,self.pred_word3,self.pred_word4]
-            
+        current_text = self.text_area.text()#current text
+        completion_buttons = [self.compl_word1,self.compl_word2,self.compl_word3,self.compl_word4]
+        prediction_buttons = [self.pred_word1,self.pred_word2,self.pred_word3,self.pred_word4]
+        
 
-            if((self.current_col in [3,11]) and (self.current_row < 3)):#down button
-                self.current_row += 1
-                self.current_col -= 1
-                if(self.current_row == 3):
-                    self.current_col = 0 
+        if((self.current_col in [3,11]) and (self.current_row < 3)):#down button
+              self.current_row += 1
+              self.current_col -= 1
+              if(self.current_row == 3):
+                self.current_col = 0 
 
-            elif((self.current_col in [4,12]) and (self.current_row > -1)):#up button
-                self.current_row -= 1
-                self.current_col += 1
-                if(self.current_row == -1):
-                    self.current_col = 0
+        elif((self.current_col in [4,12]) and (self.current_row > -1)):#up button
+              self.current_row -= 1
+              self.current_col += 1
+              if(self.current_row == -1):
+                self.current_col = 0
 
-            elif(self.current_row in [-1,3]):#suggestion
+        elif(self.current_row in [-1,3]):#suggestion
                 try:
                     buttons = completion_buttons if (self.current_row == -1) else prediction_buttons
-                    buttons[self.current_col].setStyleSheet("background-color: transparent;")  # Default
 
                     selected_word = buttons[self.current_col].text()
-                    if(self.current_row == -1):#completion
-                        if current_text != "":
-                            processed_text = current_text.split()[:-1] 
-                        if(len(processed_text)>1):
-                            processed_text = (" ").join(processed_text) + " "
-                        else:
-                            processed_text = ""
-                    else:#prediction
-                        processed_text = current_text + " "
-
+                    if current_text != "":
+                        processed_text = current_text.split()[:-1]
+                    if(len(processed_text)>1):
+                        processed_text = (" ").join(processed_text) + " "
+                    else:
+                        processed_text = ""
                     self.text_area.setText(processed_text + selected_word + " ")
 
                     self.current_col = 0
@@ -831,88 +825,61 @@ class Ui_MainWindow(object):
                 except Exception as e:
                     print(f"Error in select key suggestion: {e}")
 
-            elif((self.current_row == 1) and(self.current_col in [2,13])):#shoot
-                    if(self.current_col == 2):
-                        self.current_col = 13
-                    else:
-                        self.current_col = 2
-                        
-            elif((self.current_row == 2) and(self.current_col in [5,10])):#back    
-                    self.text_area.setText(current_text[:-1])
-            elif((self.current_row == 2) and(self.current_col in [0,15])):#clr 
-                    self.text_area.setText("") 
-            elif((self.current_row == 2) and(self.current_col in [2,13])):#enter
-                    self.speak(current_text)
-                    self.text_area.setText("")   
-            else:#alpha button and space
-                    """Select the highlighted key and append it to the text area."""
-                    try:
-                        selected_key = self.keyboard_layout[self.current_row][self.current_col]
-                        
-                        if current_text == "Typed Text Here...":
-                                current_text = ""  # Clear the placeholder text
-                        self.text_area.setText(current_text + selected_key)
-                    except Exception as e:
-                        print(f"Error in alpha select: {e}")
 
-            self.update_completion()
-            self.update_nxw()
-        except Exception as e:
-                print(f"Error in select_key: {e}")
+        elif((self.current_row == 1) and(self.current_col in [2,13])):#shoot
+                if(self.current_col == 2):
+                      self.current_col = 13
+                else:
+                      self.current_col = 2
+                      
+        elif((self.current_row == 2) and(self.current_col in [5,10])):#back    
+                self.text_area.setText(current_text[:-1])
+        elif((self.current_row == 2) and(self.current_col in [0,15])):#clr 
+                self.text_area.setText("") 
+        elif((self.current_row == 2) and(self.current_col in [2,13])):#enter
+                self.speak(current_text)
+                self.text_area.setText("")   
+        else:#alpha button and space
+                """Select the highlighted key and append it to the text area."""
+                selected_key = self.keyboard_layout[self.current_row][self.current_col]
+                
+                if current_text == "Typed Text Here...":
+                        current_text = ""  # Clear the placeholder text
+                self.text_area.setText(current_text + selected_key)
+
+        self.update_completion()
+        self.update_nxw()
+
 
 #----------------update Word_completion-------------------------------------
     def update_completion(self):
         """Fetch and update predictions dynamically."""
-        try:
-            if self.text_area.text() != "":# text area not  empty
-                
-                prefix = self.text_area.text().lower().split()[-1] #choose the last word
-                
-            else:
-                prefix = False
-                
-            if prefix:
-                suggestions = trie.search(prefix)
-                if(len(suggestions)<4):
-                    suggestions = ['-----','-----','-----','-----']
-                    
-            else:
-                suggestions = ['-----','-----','-----','-----']
-            self.compl_word1.setText(suggestions[0])
-            self.compl_word2.setText(suggestions[1])
-            self.compl_word3.setText(suggestions[2])
-            self.compl_word4.setText(suggestions[3])
-            
-        except Exception as e:
-                print(f"Error in update_completion: {e}")
+        prefix = self.text_area.text().lower().split()[-1]
+        if prefix:
+            suggestions = trie.search(prefix)
+        else:
+            suggestions = ['-----','-----','-----','-----']
+        self.compl_word1.setText(suggestions[0])
+        self.compl_word2.setText(suggestions[1])
+        self.compl_word3.setText(suggestions[2])
+        self.compl_word4.setText(suggestions[3])
             #self.prediction_label.setText(f"Predictions: {', '.join(suggestions)}")
         #else:
             #self.prediction_label.setText("Predictions: ")
 
 #-----------------update next word--------------------------------------------
     def update_nxw(self):
-        try:
-            text = self.text_area.text()
-            if(text[-1] == ' ' and text!=""):
-                try:
-                    last_word = text.lower().split()[-1]
-                except Exception as e:
-                    print(f"Error in text(nxw): {e}")
-                if(last_word):
-                    suggestions = self.nxw_p.predict_next_word(last_word)
-                    if(len(suggestions)<4):
-                        suggestions = ['-----','-----','-----','-----']
-                        
-                else:
-                    suggestions = ['-----','-----','-----','-----']
-                    
-                self.pred_word1.setText(suggestions[0])
-                self.pred_word2.setText(suggestions[1])
-                self.pred_word3.setText(suggestions[2])
-                self.pred_word4.setText(suggestions[3])
-                
-        except Exception as e:
-                print(f"Error in update_nxw: {e}")
+        text = self.text_area.text()
+        if(text[-1] == ' '):
+            last_word = text.lower().split()[-1]
+            if(last_word):
+                suggestions = self.nxw_p.predict_next_word(last_word)
+            else:
+                suggestions = ['-----','-----','-----','-----']
+            self.pred_word1.setText(suggestions[0])
+            self.pred_word2.setText(suggestions[1])
+            self.pred_word3.setText(suggestions[2])
+            self.pred_word4.setText(suggestions[3])
         
 
 

@@ -16,12 +16,16 @@ for sentence in brown.sents():
         bigram_model[current_word][next_word] += 1
 
 def predict_next_word(last_word, top_n=4):
-    """
-    Given the last word, return a list of top_n most likely next words.
-    """
-    suggestions = bigram_model.get(last_word.lower(), {})
-    most_common = suggestions.most_common(top_n)
-    return [word for word, count in most_common]
+    try:
+        """
+        Given the last word, return a list of top_n most likely next words.
+        """
+        suggestions = bigram_model.get(last_word.lower(), {})
+        most_common = suggestions.most_common(top_n)
+        return [word for word, count in most_common]
+    except Exception as e:
+        print(f"Error in update_nxw: {e}")
+        
 
 # Example:
 print("Predictions for 'the':", predict_next_word("the"))
