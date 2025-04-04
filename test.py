@@ -1,3 +1,4 @@
+"""
 from collections import defaultdict, Counter
 from nltk.corpus import brown
 import nltk
@@ -18,7 +19,7 @@ for sentence in brown.sents():
 def predict_next_word(last_word, top_n=4):
     try:
         """
-        Given the last word, return a list of top_n most likely next words.
+        #Given the last word, return a list of top_n most likely next words.
         """
         suggestions = bigram_model.get(last_word.lower(), {})
         most_common = suggestions.most_common(top_n)
@@ -30,3 +31,33 @@ def predict_next_word(last_word, top_n=4):
 # Example:
 print("Predictions for 'the':", predict_next_word("the"))
 # Might output: Predictions for 'the': ['other', 'same', 'best', 'only'] (depending on corpus frequencies)
+
+"""
+from PyQt5.QtWidgets import QApplication, QPushButton, QMainWindow
+from PyQt5.QtMultimedia import QSoundEffect
+from PyQt5.QtCore import QUrl
+import sys
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        # Create Button
+        self.button = QPushButton("Click Me", self)
+        self.button.setGeometry(100, 100, 150, 50)
+
+        # Load Sound
+        self.sound = QSoundEffect()
+        self.sound.setSource(QUrl.fromLocalFile("click_sound.wav"))  # Replace with your sound file
+
+        # Connect Button Click to Play Sound
+        self.button.clicked.connect(self.play_sound)
+
+    def play_sound(self):
+        self.sound.play()
+
+# Run Application
+app = QApplication(sys.argv)
+window = MainWindow()
+window.show()
+sys.exit(app.exec_())

@@ -53,7 +53,35 @@ def get_gaze_ratio(eye_points, facial_landmarks):
 
 
     threshold_eye = cv2.resize(threshold_eye, None, fx=5, fy=5)
-    left_side_threshold = cv2.resize(left_side_threshold, None,fx =5, fy=5)
+    left_side_threshold = cv2.resize(left_side_threshold, None,fx =5, fy=5)from PyQt5.QtWidgets import QApplication, QPushButton, QMainWindow
+from PyQt5.QtMultimedia import QSoundEffect
+from PyQt5.QtCore import QUrl
+import sys
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        # Create Button
+        self.button = QPushButton("Click Me", self)
+        self.button.setGeometry(100, 100, 150, 50)
+
+        # Load Sound
+        self.sound = QSoundEffect()
+        self.sound.setSource(QUrl.fromLocalFile("click_sound.wav"))  # Replace with your sound file
+
+        # Connect Button Click to Play Sound
+        self.button.clicked.connect(self.play_sound)
+
+    def play_sound(self):
+        self.sound.play()
+
+# Run Application
+app = QApplication(sys.argv)
+window = MainWindow()
+window.show()
+sys.exit(app.exec_())
+
     left_side_white = cv2.countNonZero(left_side_threshold)
 
     right_side_threshold = cv2.resize(right_side_threshold, None,fx =5, fy=5)

@@ -667,16 +667,16 @@ class Ui_MainWindow(object):
         self.left_active_letter.setText(_translate("MainWindow", "A"))
         self.text_area.setText(_translate("MainWindow", "Typed Text Here..."))
         
-        self.pred_word1.setText(_translate("MainWindow", "Word 1"))
-        self.pred_word2.setText(_translate("MainWindow", "Word 2"))
-        self.pred_word3.setText(_translate("MainWindow", "Word 3"))
-        self.pred_word4.setText(_translate("MainWindow", "Word 4"))
+        self.pred_word1.setText(_translate("MainWindow", "----"))
+        self.pred_word2.setText(_translate("MainWindow", "----"))
+        self.pred_word3.setText(_translate("MainWindow", "----"))
+        self.pred_word4.setText(_translate("MainWindow", "----"))
         self.prediction_label.setText(_translate("MainWindow", "Next Word Suggestion"))
         self.word_completion_label.setText(_translate("MainWindow", "Word completion Suggestion"))
-        self.compl_word1.setText(_translate("MainWindow", "Word 1"))
-        self.compl_word2.setText(_translate("MainWindow", "Word 2"))
-        self.compl_word3.setText(_translate("MainWindow", "Word 3"))
-        self.compl_word4.setText(_translate("MainWindow", "Word 4"))
+        self.compl_word1.setText(_translate("MainWindow", "----"))
+        self.compl_word2.setText(_translate("MainWindow", "----"))
+        self.compl_word3.setText(_translate("MainWindow", "----"))
+        self.compl_word4.setText(_translate("MainWindow", "----"))
         self.right_active.setText(_translate("MainWindow", "CENTER"))
         self.right_active_letter.setText(_translate("MainWindow", "A"))
 
@@ -814,7 +814,7 @@ class Ui_MainWindow(object):
                     buttons = completion_buttons if (self.current_row == -1) else prediction_buttons
                     buttons[self.current_col].setStyleSheet("background-color: transparent;")  # Default
 
-                    selected_word = buttons[self.current_col].text()
+                    selected_word = buttons[self.current_col].text()+" "
                     if(self.current_row == -1):#completion
                         if current_text != "":
                             processed_text = current_text.split()[:-1] 
@@ -824,8 +824,8 @@ class Ui_MainWindow(object):
                             processed_text = ""
                     else:#prediction
                         processed_text = current_text + " "
-
-                    self.text_area.setText(processed_text + selected_word + " ")
+                    selected_word = "" if selected_word == "----" else selected_word
+                    self.text_area.setText(processed_text + selected_word )
 
                     self.current_col = 0
                     self.current_row = 0 if (self.current_row == -1) else 2
