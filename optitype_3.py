@@ -1011,7 +1011,8 @@ class EyeDetection:
                 gaze_ratio_left_eye = self.get_gaze_ratio([36, 37, 38, 39, 40, 41], landmarks, frame, gray)
                 gaze_ratio_right_eye = self.get_gaze_ratio([42, 43, 44, 45, 46, 47], landmarks, frame, gray)
                 gaze_ratio = (gaze_ratio_left_eye + gaze_ratio_right_eye) / 2
-
+                #cv2.putText(frame, gaze_ratio, (50, 100), self.font, 2, (0, 0, 255), 3)
+                print(gaze_ratio)
                 if gaze_ratio < 1:
                         cv2.putText(frame, "RIGHT", (50, 100), self.font, 2, (0, 0, 255), 3)
                         #when left we need to do left transition over the buttons
@@ -1029,7 +1030,7 @@ class EyeDetection:
 
                         
 
-                elif 1 < gaze_ratio < 3:
+                elif 1 < gaze_ratio < 1.5:
                         cv2.putText(frame, "CENTER", (50, 100), self.font, 2, (255, 0, 255), 3)
                         self.left_frame = 0
                         self.right_frame = 0
